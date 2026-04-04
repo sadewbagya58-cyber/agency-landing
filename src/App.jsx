@@ -423,7 +423,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-gray-400">Email us at</p>
-                  <p className="text-lg font-medium text-white">hello@auratech.dev</p>
+                  <a href="mailto:sadewbagya58@gmail.com" className="text-lg font-medium text-white hover:text-purple-400 transition-colors">sadewbagya58@gmail.com</a>
                 </div>
               </div>
             </div>
