@@ -401,6 +401,39 @@ const TechStack = () => {
 };
 
 const Contact = () => {
+  const [status, setStatus] = useState("idle");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("submitting");
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/sadewbagya58@gmail.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        setStatus("success");
+        e.target.reset();
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch (err) {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 relative z-10">
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-purple-accent/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -436,30 +469,41 @@ const Contact = () => {
             variants={fadeInUp}
             className="glass-card p-8 md:p-10 rounded-3xl border border-white/5"
           >
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_subject" value="New Agency Lead!" />
+              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-300">First Name</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-xl glass-input transition-all focus:shadow-[0_0_15px_rgba(124,58,237,0.3)]" placeholder="John" />
+                  <input type="text" name="First Name" required className="w-full px-4 py-3 rounded-xl glass-input transition-all focus:shadow-[0_0_15px_rgba(124,58,237,0.3)]" placeholder="John" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-300">Last Name</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-xl glass-input transition-all focus:shadow-[0_0_15px_rgba(124,58,237,0.3)]" placeholder="Doe" />
+                  <input type="text" name="Last Name" required className="w-full px-4 py-3 rounded-xl glass-input transition-all focus:shadow-[0_0_15px_rgba(124,58,237,0.3)]" placeholder="Doe" />
                 </div>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-300">Email Address</label>
-                <input type="email" className="w-full px-4 py-3 rounded-xl glass-input transition-all focus:shadow-[0_0_15px_rgba(124,58,237,0.3)]" placeholder="john@example.com" />
+                <input type="email" name="email" required className="w-full px-4 py-3 rounded-xl glass-input transition-all focus:shadow-[0_0_15px_rgba(124,58,237,0.3)]" placeholder="john@example.com" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-300">Message</label>
-                <textarea rows="4" className="w-full px-4 py-3 rounded-xl glass-input transition-all resize-none focus:shadow-[0_0_15px_rgba(124,58,237,0.3)]" placeholder="Tell us about your project..."></textarea>
+                <textarea rows="4" name="message" required className="w-full px-4 py-3 rounded-xl glass-input transition-all resize-none focus:shadow-[0_0_15px_rgba(124,58,237,0.3)]" placeholder="Tell us about your project..."></textarea>
               </div>
               <div>
-                <button className="w-full bg-white text-black py-4 rounded-xl font-bold text-lg hover:bg-gray-200 transition-all transform hover:scale-[1.02]">
-                  Send Message
+                <button type="submit" disabled={status === "submitting"} className="w-full bg-white flex justify-center text-black py-4 rounded-xl font-bold text-lg hover:bg-gray-200 transition-all transform hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100">
+                  {status === "submitting" ? "Sending..." : "Send Message"}
                 </button>
-                <p className="text-gray-400 text-sm mt-4 text-center">✨ Free consultation available. We typically reply within 24 hours.</p>
+                {status === "success" && (
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-green-400 text-sm mt-4 text-center font-medium">✨ Message sent successfully! We'll be in touch soon.</motion.p>
+                )}
+                {status === "error" && (
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-400 text-sm mt-4 text-center font-medium">⚠️ Something went wrong. Please try again.</motion.p>
+                )}
+                {status !== "success" && status !== "error" && (
+                  <p className="text-gray-400 text-sm mt-4 text-center">✨ Free consultation available. We typically reply within 24 hours.</p>
+                )}
               </div>
             </form>
           </motion.div>
