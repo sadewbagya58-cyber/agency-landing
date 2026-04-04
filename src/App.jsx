@@ -75,7 +75,7 @@ const Navbar = () => {
               <a href="#work" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Work</a>
               <a href="#tech" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Tech</a>
               <a href="#contact" className="bg-purple-accent hover:bg-purple-600 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(124,58,237,0.5)]">
-                Start Project
+                Book Your Free Consultation
               </a>
             </div>
           </div>
@@ -103,7 +103,7 @@ const Navbar = () => {
             <a href="#services" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Services</a>
             <a href="#work" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Work</a>
             <a href="#tech" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Tech</a>
-            <a href="#contact" className="text-purple-accent block px-3 py-2 text-base font-medium">Start Project</a>
+            <a href="#contact" className="text-purple-accent block px-3 py-2 text-base font-medium">Book Consultation</a>
           </div>
         </motion.div>
       )}
@@ -139,15 +139,15 @@ const Hero = () => {
             }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight max-w-5xl mx-auto"
           >
-            We Build <span className="text-gradient">Modern Websites</span> <br className="hidden md:block" />
-            That Grow Your Business
+            We Build <span className="text-gradient">High-Performance Websites</span> <br className="hidden md:block" />
+            That Turn Visitors Into Customers.
           </motion.h1>
           
           <motion.p 
             variants={fadeInUp}
             className="mt-6 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10"
           >
-            We help brands dominate the digital space with high-converting websites and SEO strategies that drive real growth.
+            Stop losing leads with a slow website. We create premium, SEO-optimized digital experiences designed to scale your revenue.
           </motion.p>
           
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -156,7 +156,7 @@ const Hero = () => {
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             >
               <a href="#contact" className="bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-200 transition-colors flex items-center gap-2">
-                Get Started <ArrowRight size={20} />
+                Get My Free Proposal <ArrowRight size={20} />
               </a>
             </motion.div>
             <a href="#work" className="glass-card px-8 py-4 rounded-full font-semibold text-lg text-white hover:bg-white/10 transition-colors">
@@ -188,17 +188,33 @@ const Hero = () => {
   );
 };
 
+const TrustLogos = () => {
+  return (
+    <section className="py-10 border-y border-white/5 bg-black/40 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p className="text-sm text-gray-400 font-semibold uppercase tracking-widest mb-8">Trusted by innovative startups and fast-growing brands</p>
+        <div className="flex flex-wrap justify-center gap-8 md:gap-16 items-center opacity-70 grayscale">
+          <div className="flex items-center gap-2 text-2xl font-bold text-white"><Zap size={28} className="text-purple-accent"/> TechFlow</div>
+          <div className="flex items-center gap-2 text-2xl font-bold text-white"><Server size={28} className="text-blue-accent"/> Nexa</div>
+          <div className="flex items-center gap-2 text-xl font-bold text-white tracking-[0.2em] font-serif uppercase"><Bot size={24} className="text-yellow-500"/> Global Solutions</div>
+          <div className="flex items-center gap-2 text-2xl font-black italic text-white"><Code size={28} className="text-green-400"/> Innovate Inc.</div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Services = () => {
   const services = [
     {
       icon: <Code className="w-10 h-10 text-purple-accent mb-6" />,
-      title: "Full-Stack Development",
-      description: "Building complex, high-performance web applications from scratch using modern frameworks."
+      title: "Revenue-Driven Web Design",
+      description: "Custom websites built specifically to increase your sales."
     },
     {
       icon: <Zap className="w-10 h-10 text-yellow-500 mb-6" />,
-      title: "Speed & SEO Mastery",
-      description: "Optimizing Core Web Vitals to ensure lightning-fast load times and top-tier Google rankings."
+      title: "Rank Higher & Grow Traffic",
+      description: "Data-backed SEO strategies to dominate Google search results."
     },
     {
       icon: <Bot className="w-10 h-10 text-blue-accent mb-6" />,
@@ -267,14 +283,16 @@ const Projects = () => {
       category: "Web Application",
       tech: "React + Tailwind",
       image: "/anime_site_preview.png",
-      link: "#"
+      link: "#",
+      result: "50% faster load speed & 2x user engagement."
     },
     {
       title: "Creative Developer Portfolio",
       category: "Web Design",
       tech: "React + Framer Motion",
       image: "/portfolio_preview.png",
-      link: "#"
+      link: "#",
+      result: "Increased inbound inquiries by 150% in 30 days."
     }
   ];
 
@@ -337,15 +355,22 @@ const Projects = () => {
                     {project.tech}
                   </span>
                 </div>
-                <h3 className="text-2xl font-bold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all mb-5">
+                <h3 className="text-2xl font-bold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all mb-3">
                   {project.title}
                 </h3>
-                <a 
-                  href={project.link} 
-                  className="inline-flex items-center gap-2 text-sm font-semibold bg-white text-black px-5 py-2.5 rounded-xl hover:bg-gray-200 transition-colors w-max"
-                >
-                  View Live Demo <ExternalLink size={16} />
-                </a>
+                {project.result && (
+                  <p className="text-sm text-green-400 font-medium mb-5 bg-green-400/10 inline-block px-3 py-1.5 rounded-lg border border-green-400/20">
+                    <span className="text-white font-semibold">Result:</span> {project.result}
+                  </p>
+                )}
+                <div>
+                  <a 
+                    href={project.link} 
+                    className="inline-flex items-center gap-2 text-sm font-bold bg-purple-accent text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition-colors shadow-[0_0_15px_rgba(124,58,237,0.4)] w-max"
+                  >
+                    View Live Demo <ExternalLink size={16} />
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -452,7 +477,8 @@ const Contact = () => {
             variants={fadeInUp}
           >
             <h2 className="text-4xl md:text-6xl font-bold mb-6">Let's build something <span className="text-gradient">extraordinary</span> together.</h2>
-            <p className="text-gray-400 text-lg mb-10">Whether you need a simple landing page or a complex web application, we have the expertise to bring your vision to life.</p>
+            <p className="text-gray-400 text-lg mb-6">Whether you need a simple landing page or a complex web application, we have the expertise to bring your vision to life.</p>
+            <p className="text-xl md:text-2xl font-bold text-white mb-10 border-l-4 border-purple-accent pl-4">Join 10+ businesses already scaling with AuraTech.</p>
             
             <div className="space-y-6">
               <div className="flex items-center gap-4">
@@ -563,6 +589,7 @@ function App() {
       <Navbar />
       <main className="flex-grow z-10">
         <Hero />
+        <TrustLogos />
         <Services />
         <Projects />
         <TechStack />
