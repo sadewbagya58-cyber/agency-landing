@@ -139,15 +139,15 @@ const Hero = () => {
             }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight max-w-5xl mx-auto"
           >
-            We Build <span className="text-gradient">High-Performance Websites</span> <br className="hidden md:block" />
-            That Turn Visitors Into Customers.
+            We Build <span className="text-gradient">High-Converting Websites</span> <br className="hidden md:block" />
+            That Turn Visitors Into Paying Customers.
           </motion.h1>
           
           <motion.p 
             variants={fadeInUp}
             className="mt-6 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10"
           >
-            Stop losing leads with a slow website. We create premium, SEO-optimized digital experiences designed to scale your revenue.
+            Stop losing leads with outdated designs. We create premium, performance-driven digital experiences designed to scale your business.
           </motion.p>
           
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -156,11 +156,11 @@ const Hero = () => {
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             >
               <a href="#contact" className="bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-200 transition-colors flex items-center gap-2">
-                Get My Free Proposal <ArrowRight size={20} />
+                Get My Free Website Demo <ArrowRight size={20} />
               </a>
             </motion.div>
-            <a href="#work" className="glass-card px-8 py-4 rounded-full font-semibold text-lg text-white hover:bg-white/10 transition-colors">
-              View Our Work
+            <a href="#contact" className="glass-card px-8 py-4 rounded-full font-semibold text-lg text-white hover:bg-white/10 transition-colors">
+              Book a Free Consultation
             </a>
           </motion.div>
 
@@ -170,15 +170,15 @@ const Hero = () => {
           >
             <div>
               <h4 className="text-4xl font-bold text-white mb-2">10+</h4>
-              <p className="text-gray-400 text-sm uppercase tracking-wider">Projects Completed</p>
+              <p className="text-gray-400 text-sm uppercase tracking-wider">Projects Delivered</p>
             </div>
             <div>
-              <h4 className="text-4xl font-bold text-white mb-2">5+</h4>
-              <p className="text-gray-400 text-sm uppercase tracking-wider">Happy Clients</p>
+              <h4 className="text-4xl font-bold text-white mb-2">100%</h4>
+              <p className="text-gray-400 text-sm uppercase tracking-wider">Client Satisfaction</p>
             </div>
             <div>
-              <h4 className="text-4xl font-bold text-white mb-2">24/7</h4>
-              <p className="text-gray-400 text-sm uppercase tracking-wider">Premium Support</p>
+              <h4 className="text-4xl font-bold text-white mb-2">&lt;24h</h4>
+              <p className="text-gray-400 text-sm uppercase tracking-wider">Quick Response</p>
             </div>
           </motion.div>
 
@@ -284,6 +284,7 @@ const Projects = () => {
       tech: "React + Tailwind",
       image: "/anime_site_preview.png",
       link: "#",
+      description: "A high-performance streaming platform built for speed and engagement.",
       result: "50% faster load speed & 2x user engagement."
     },
     {
@@ -292,6 +293,7 @@ const Projects = () => {
       tech: "React + Framer Motion",
       image: "/portfolio_preview.png",
       link: "#",
+      description: "A premium digital portfolio customized to attract high-value clients.",
       result: "Increased inbound inquiries by 150% in 30 days."
     }
   ];
@@ -355,9 +357,12 @@ const Projects = () => {
                     {project.tech}
                   </span>
                 </div>
-                <h3 className="text-2xl font-bold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all mb-3">
+                <h3 className="text-2xl font-bold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all mb-1">
                   {project.title}
                 </h3>
+                {project.description && (
+                   <p className="text-gray-400 text-sm mb-4 pr-2">{project.description}</p>
+                )}
                 {project.result && (
                   <p className="text-sm text-green-400 font-medium mb-5 bg-green-400/10 inline-block px-3 py-1.5 rounded-lg border border-green-400/20">
                     <span className="text-white font-semibold">Result:</span> {project.result}
@@ -374,6 +379,42 @@ const Projects = () => {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const Testimonial = () => {
+  return (
+    <section className="py-20 relative z-10 border-t border-white/5 bg-black/60">
+      <div className="absolute top-1/2 right-0 w-[300px] h-[300px] bg-purple-accent/10 rounded-full blur-[80px] pointer-events-none -translate-y-1/2"></div>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeInUp}
+        >
+          <div className="flex justify-center mb-6">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} className="w-6 h-6 text-yellow-500 mx-1" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+          <blockquote className="text-2xl md:text-4xl font-medium leading-relaxed italic text-white mb-8">
+            "AuraTech delivered a masterpiece. Our conversion rate increased by <span className="text-purple-400 font-bold">40%</span> in the first month."
+          </blockquote>
+          <div className="flex items-center justify-center gap-4">
+            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-xl font-bold text-white border border-white/10 uppercase">
+              T
+            </div>
+            <div className="text-left">
+              <p className="font-bold text-white text-lg">Founder</p>
+              <p className="text-gray-400 text-sm">TechFlow</p>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -592,6 +633,7 @@ function App() {
         <TrustLogos />
         <Services />
         <Projects />
+        <Testimonial />
         <TechStack />
         <Contact />
       </main>
