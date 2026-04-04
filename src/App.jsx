@@ -492,7 +492,7 @@ const Footer = () => {
 const FloatingWhatsApp = () => {
   return (
     <motion.a
-      href="https://wa.me/0704479608"
+      href="https://wa.me/94704479608"
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}
