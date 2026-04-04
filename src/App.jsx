@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { 
   Menu, X, Code, Search, Server, 
-  ArrowRight, ExternalLink, Send, MessageCircle 
+  ArrowRight, ExternalLink, Send, MessageCircle, Bot, Zap
 } from 'lucide-react';
 import { 
   FaReact, FaNodeJs, FaFigma, FaAws, FaGoogle
@@ -192,13 +192,18 @@ const Services = () => {
   const services = [
     {
       icon: <Code className="w-10 h-10 text-purple-accent mb-6" />,
-      title: "High-Converting Web Design",
-      description: "Modern websites built to turn visitors into loyal customers."
+      title: "Full-Stack Development",
+      description: "Building complex, high-performance web applications from scratch using modern frameworks."
     },
     {
-      icon: <Search className="w-10 h-10 text-blue-accent mb-6" />,
-      title: "Rank #1 on Google",
-      description: "Data-driven SEO strategies to increase your organic traffic and visibility."
+      icon: <Zap className="w-10 h-10 text-yellow-500 mb-6" />,
+      title: "Speed & SEO Mastery",
+      description: "Optimizing Core Web Vitals to ensure lightning-fast load times and top-tier Google rankings."
+    },
+    {
+      icon: <Bot className="w-10 h-10 text-blue-accent mb-6" />,
+      title: "AI-Powered Solutions",
+      description: "Integrating intelligent chatbots and automated workflows to scale your business efficiency."
     },
     {
       icon: <Server className="w-10 h-10 text-purple-400 mb-6" />,
@@ -218,7 +223,7 @@ const Services = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Our <span className="text-gradient">Expertise</span></h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">Everything you need to establish a powerful digital presence.</p>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">Elite digital capabilities designed to accelerate exceptional growth.</p>
         </motion.div>
 
         <motion.div 
@@ -226,7 +231,7 @@ const Services = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {services.map((service, index) => (
             <motion.div 
@@ -353,11 +358,11 @@ const Projects = () => {
 const TechStack = () => {
   const icons = [
     { Icon: FaReact, color: "#61DAFB", name: "React" },
-    { Icon: SiTailwindcss, color: "#06B6D4", name: "Tailwind" },
+    { Icon: SiTailwindcss, color: "#06B6D4", name: "Tailwind CSS" },
     { Icon: SiNextdotjs, color: "#ffffff", name: "Next.js" },
-    { Icon: SiFramer, color: "#0055FF", name: "Framer" },
-    { Icon: SiFirebase, color: "#FFCA28", name: "Firebase" },
     { Icon: FaNodeJs, color: "#339933", name: "Node.js" },
+    { Icon: SiFramer, color: "#0055FF", name: "Framer Motion" },
+    { Icon: SiFirebase, color: "#FFCA28", name: "Firebase" },
     { Icon: FaFigma, color: "#F24E1E", name: "Figma" },
     { Icon: FaAws, color: "#FF9900", name: "AWS" },
     { Icon: FaGoogle, color: "#4285F4", name: "Google Cloud" }
