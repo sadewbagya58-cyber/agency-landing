@@ -73,9 +73,13 @@ const Navbar = () => {
             <div className="ml-10 flex items-baseline space-x-8">
               <a href="#services" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Services</a>
               <a href="#work" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Work</a>
-              <a href="#tech" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Tech</a>
-              <a href="#contact" className="bg-purple-accent hover:bg-purple-600 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(124,58,237,0.5)]">
-                Book Your Free Consultation
+              <a href="#about" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+              <a
+                href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
+                target="_blank" rel="noopener noreferrer"
+                className="bg-[#25D366] hover:bg-[#1ebe5a] text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all transform hover:scale-105 flex items-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.4)]"
+              >
+                <MessageCircle size={15} /> Message for a Quote
               </a>
             </div>
           </div>
@@ -102,8 +106,12 @@ const Navbar = () => {
           <div className="px-2 pt-2 pb-6 space-y-1 sm:px-3">
             <a href="#services" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Services</a>
             <a href="#work" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Work</a>
-            <a href="#tech" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Tech</a>
-            <a href="#contact" className="text-purple-accent block px-3 py-2 text-base font-medium">Book Consultation</a>
+            <a href="#about" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">About</a>
+            <a
+              href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
+              target="_blank" rel="noopener noreferrer"
+              className="text-[#25D366] block px-3 py-2 text-base font-medium"
+            >💬 Message for a Quote</a>
           </div>
         </motion.div>
       )}
@@ -143,28 +151,29 @@ const Hero = () => {
             }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight max-w-5xl mx-auto"
           >
-            We Build <span className="text-gradient">High-Converting Websites</span> <br className="hidden md:block" />
-            That Turn Visitors Into Paying Customers.
+            We Build <span className="text-gradient">High-Performance</span><br className="hidden md:block" />
+            Websites &amp; Apps For Your Business.
           </motion.h1>
           
           <motion.p 
             variants={fadeInUp}
             className="mt-6 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10"
           >
-            Stop losing leads with outdated designs. We create premium, performance-driven digital experiences designed to scale your business.
+            Transform your business with modern digital solutions. From small shops to large enterprises, we help you grow online.
           </motion.p>
           
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <motion.div
+            <motion.a
+              href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
+              target="_blank" rel="noopener noreferrer"
               animate={{ y: [0, -5, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="bg-[#25D366] hover:bg-[#1ebe5a] text-white px-8 py-4 rounded-full font-semibold text-lg transition-colors flex items-center gap-2 shadow-[0_0_20px_rgba(37,211,102,0.35)] w-full sm:w-auto justify-center"
             >
-              <a href="#contact" className="bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-200 transition-colors flex items-center gap-2">
-                Get My Free Website Demo <ArrowRight size={20} />
-              </a>
-            </motion.div>
-            <a href="#contact" className="glass-card px-8 py-4 rounded-full font-semibold text-lg text-white hover:bg-white/10 transition-colors">
-              Book a Free Consultation
+              <MessageCircle size={20} /> Message on WhatsApp for a Quote
+            </motion.a>
+            <a href="#contact" className="glass-card px-8 py-4 rounded-full font-semibold text-lg text-white hover:bg-white/10 transition-colors border border-white/10 w-full sm:w-auto text-center">
+              Start Your Project
             </a>
           </motion.div>
 
@@ -211,24 +220,32 @@ const TrustLogos = () => {
 const Services = () => {
   const services = [
     {
-      icon: <Code className="w-10 h-10 text-purple-accent mb-6" />,
-      title: "Revenue-Driven Web Design",
-      description: "Custom websites built specifically to increase your sales."
+      icon: <Code className="w-10 h-10 text-purple-accent" />,
+      title: "Custom Website Development",
+      subtitle: "For Business & Personal",
+      description: "Fully bespoke websites tailored to your brand — from simple landing pages and portfolios to complex multi-page business sites. Built fast, mobile-first, and ready to convert.",
+      tag: "Most Popular"
     },
     {
-      icon: <Zap className="w-10 h-10 text-yellow-500 mb-6" />,
-      title: "Rank Higher & Grow Traffic",
-      description: "Data-backed SEO strategies to dominate Google search results."
+      icon: <Server className="w-10 h-10 text-blue-accent" />,
+      title: "E-commerce Solutions",
+      subtitle: "Online Stores with Payment Integration",
+      description: "Launch your online store with seamless payment gateways (Stripe, PayPal & local options), product management, and an experience that turns browsers into buyers.",
+      tag: "High ROI"
     },
     {
-      icon: <Bot className="w-10 h-10 text-blue-accent mb-6" />,
-      title: "AI-Powered Solutions",
-      description: "Integrating intelligent chatbots and automated workflows to scale your business efficiency."
+      icon: <Bot className="w-10 h-10 text-yellow-500" />,
+      title: "UI/UX Design",
+      subtitle: "Modern & User-Friendly Interfaces",
+      description: "Pixel-perfect, intuitive interfaces designed to delight users. Every layout, color, and interaction is crafted to guide your visitors toward taking action.",
+      tag: null
     },
     {
-      icon: <Server className="w-10 h-10 text-purple-400 mb-6" />,
-      title: "Lightning-Fast Hosting",
-      description: "99.9% uptime with ultra-fast loading speeds for a seamless user experience."
+      icon: <Zap className="w-10 h-10 text-green-400" />,
+      title: "Mobile App Development",
+      subtitle: "Android & iOS Support",
+      description: "Cross-platform mobile apps built with React Native — one codebase, two platforms. From concept to App Store and Google Play, we handle the full journey.",
+      tag: "New"
     }
   ];
 
@@ -242,8 +259,8 @@ const Services = () => {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Our <span className="text-gradient">Expertise</span></h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">Elite digital capabilities designed to accelerate exceptional growth.</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">What We <span className="text-gradient">Build For You</span></h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">Affordable, high-quality digital solutions for local and global clients.</p>
           <p className="mt-4 text-sm text-purple-300 font-medium">💎 Premium solutions starting at competitive rates. <a href="#contact" className="underline underline-offset-2 text-purple-400 hover:text-white transition-colors">Get a custom quote today.</a></p>
         </motion.div>
 
@@ -259,20 +276,31 @@ const Services = () => {
               key={index}
               variants={fadeInUp}
               whileHover={{ 
-                scale: 1.05, 
-                rotate: 1, 
+                scale: 1.03, 
                 boxShadow: "0 20px 40px -10px rgba(124, 58, 237, 0.2)"
               }}
-              className="glass-card p-10 rounded-3xl transition-all duration-500 group relative border border-white/5 hover:border-purple-accent/50 cursor-default overflow-hidden"
+              className="glass-card p-8 rounded-3xl transition-all duration-500 group relative border border-white/5 hover:border-purple-accent/50 cursor-default overflow-hidden"
             >
-              {/* Subtle hover glow layer */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-accent/0 to-purple-accent/0 group-hover:from-purple-accent/10 group-hover:to-blue-accent/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
               
-              <div className="bg-white/5 w-20 h-20 flex items-center justify-center rounded-2xl mb-8 group-hover:bg-white/10 transition-colors relative z-10">
-                {service.icon}
+              <div className="flex items-start justify-between mb-6 relative z-10">
+                <div className="bg-white/5 w-16 h-16 flex items-center justify-center rounded-2xl group-hover:bg-white/10 transition-colors">
+                  {service.icon}
+                </div>
+                {service.tag && (
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-purple-accent/20 border border-purple-accent/40 text-purple-300">{service.tag}</span>
+                )}
               </div>
-              <h3 className="text-2xl font-bold mb-4 relative z-10">{service.title}</h3>
-              <p className="text-gray-400 leading-relaxed relative z-10">{service.description}</p>
+              <h3 className="text-xl font-bold mb-1 relative z-10">{service.title}</h3>
+              <p className="text-purple-400 text-sm font-medium mb-3 relative z-10">{service.subtitle}</p>
+              <p className="text-gray-400 leading-relaxed relative z-10 text-sm">{service.description}</p>
+              <a
+                href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
+                target="_blank" rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 text-sm text-[#25D366] font-semibold hover:underline relative z-10"
+              >
+                <MessageCircle size={15} /> Get a Quote for This
+              </a>
             </motion.div>
           ))}
         </motion.div>
@@ -284,13 +312,14 @@ const Services = () => {
 const Projects = () => {
   const projects = [
     {
-      title: "ANIMEWS - Streaming Platform",
+      title: "AniStrem — Anime Streaming Platform",
       category: "Web Application",
-      tech: "React + Tailwind",
+      tech: "React + Tailwind CSS",
       image: "/anime_site_preview.png",
-      link: "#",
-      description: "A high-performance streaming platform built for speed and engagement.",
-      result: "50% faster load speed & 2x user engagement."
+      link: "https://anistrem.vercel.app/",
+      problem: "Problem Solved: No fast, free, ad-light anime streaming platform existed for 1,000+ fans.",
+      description: "A blazing-fast streaming platform with multi-source fallback, real-time episode data, and a Netflix-style UI. Built for 1,000+ users who needed reliable, high-speed anime content.",
+      result: "Serves 1,000+ users · 50% faster load than competitors · 99.9% uptime on Vercel."
     },
     {
       title: "Creative Developer Portfolio",
@@ -298,8 +327,9 @@ const Projects = () => {
       tech: "React + Framer Motion",
       image: "/portfolio_preview.png",
       link: "#",
-      description: "A premium digital portfolio customized to attract high-value clients.",
-      result: "Increased inbound inquiries by 150% in 30 days."
+      problem: "Problem Solved: Developer had no online presence to attract international clients.",
+      description: "A premium, animated digital portfolio crafted to position the client as a high-value developer and attract inbound project inquiries globally.",
+      result: "Increased inbound client inquiries by 150% within 30 days of launch."
     }
   ];
 
@@ -361,32 +391,36 @@ const Projects = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 pb-4">
+              <div className="px-4 pb-5">
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-purple-400 font-medium text-sm">{project.category}</p>
                   <span className="text-xs bg-white/10 px-2.5 py-1 rounded-md text-gray-300 font-medium border border-white/5">
                     {project.tech}
                   </span>
                 </div>
-                <h3 className="text-2xl font-bold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all mb-1">
+                <h3 className="text-xl font-bold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all mb-2">
                   {project.title}
                 </h3>
-                {project.description && (
-                   <p className="text-gray-400 text-sm mb-4 pr-2">{project.description}</p>
-                )}
-                {project.result && (
-                  <p className="text-sm text-green-400 font-medium mb-5 bg-green-400/10 inline-block px-3 py-1.5 rounded-lg border border-green-400/20">
-                    <span className="text-white font-semibold">Result:</span> {project.result}
+                {project.problem && (
+                  <p className="text-xs text-yellow-400/80 font-semibold mb-3 flex items-start gap-1">
+                    <span className="mt-0.5">🎯</span> {project.problem}
                   </p>
                 )}
-                <div>
-                  <a 
-                    href={project.link} 
-                    className="inline-flex items-center gap-2 text-sm font-bold bg-purple-accent text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition-colors shadow-[0_0_15px_rgba(124,58,237,0.4)] w-max"
-                  >
-                    View Live Demo <ExternalLink size={16} />
-                  </a>
-                </div>
+                {project.description && (
+                   <p className="text-gray-400 text-sm mb-4 pr-2 leading-relaxed">{project.description}</p>
+                )}
+                {project.result && (
+                  <p className="text-sm text-green-400 font-medium mb-5 bg-green-400/10 block px-3 py-2 rounded-lg border border-green-400/20 leading-relaxed">
+                    <span className="text-white font-semibold">✅ Result:</span> {project.result}
+                  </p>
+                )}
+                <a 
+                  href={project.link}
+                  target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-bold bg-purple-accent text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition-colors shadow-[0_0_15px_rgba(124,58,237,0.4)] w-max"
+                >
+                  View Live Demo <ExternalLink size={16} />
+                </a>
               </div>
             </motion.div>
           ))}
@@ -479,6 +513,75 @@ const Testimonial = () => {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const WhyChooseUs = () => {
+  const reasons = [
+    { emoji: "🚀", title: "Fast Turnaround", desc: "Most projects delivered within 7–14 days, without cutting corners." },
+    { emoji: "💰", title: "Affordable Pricing", desc: "High-quality work at rates that work for startups, SMEs, and individuals." },
+    { emoji: "🌍", title: "Local & Global Clients", desc: "Based in Sri Lanka, serving clients from Asia, Europe, and beyond." },
+    { emoji: "🛠️", title: "Full Support", desc: "Post-launch support and maintenance so you're never left hanging." }
+  ];
+
+  return (
+    <section id="about" className="py-20 relative z-10 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center"
+        >
+          {/* Founder Story */}
+          <motion.div variants={fadeInUp}>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-white/10 mb-6">
+              <span className="text-sm font-medium text-gray-300">👤 The Human Behind AuraTech</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Why Choose <span className="text-gradient">AuraTech?</span>
+            </h2>
+            <div className="glass-card p-6 rounded-2xl border border-purple-accent/20 mb-8">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-accent to-blue-accent flex items-center justify-center text-2xl font-bold text-white flex-shrink-0">
+                  S
+                </div>
+                <div>
+                  <p className="font-bold text-white text-lg">Sadew Bagya</p>
+                  <p className="text-purple-400 text-sm">Founder & Lead Developer · Sri Lanka 🇱🇰</p>
+                </div>
+              </div>
+              <blockquote className="text-gray-300 leading-relaxed italic text-base border-l-4 border-purple-accent pl-4">
+                "AuraTech is led by a dedicated student developer from Sri Lanka 🇱🇰, focused on building affordable, high-quality digital solutions for local and global clients. I personally handle every project to ensure the highest standard of work."
+              </blockquote>
+            </div>
+            <a
+              href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
+              target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5a] text-white px-8 py-4 rounded-full font-semibold text-base transition-colors shadow-[0_0_20px_rgba(37,211,102,0.3)]"
+            >
+              <MessageCircle size={18} /> Let's Talk About Your Project
+            </a>
+          </motion.div>
+
+          {/* Reasons Grid */}
+          <motion.div variants={staggerContainer} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {reasons.map((r, i) => (
+              <motion.div
+                key={i}
+                variants={fadeInUp}
+                className="glass-card p-6 rounded-2xl border border-white/5 hover:border-purple-accent/40 transition-colors"
+              >
+                <span className="text-3xl mb-3 block">{r.emoji}</span>
+                <h4 className="font-bold text-white text-lg mb-2">{r.title}</h4>
+                <p className="text-gray-400 text-sm leading-relaxed">{r.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -743,6 +846,7 @@ function App() {
         <TrustLogos />
         <Services />
         <Projects />
+        <WhyChooseUs />
         <Testimonial />
         <TechStack />
         <Contact />
