@@ -330,11 +330,13 @@ const Projects = () => {
       title: "AniStrem — Anime Streaming Platform",
       category: "Web Application",
       tech: "React + Tailwind CSS",
+      showcase: "UI/UX Showcase",
       image: "/anime_site_preview.png",
       link: "https://anistrem.vercel.app/",
-      problem: "Problem Solved: No fast, free, ad-light anime streaming platform existed for 1,000+ fans.",
-      description: "A blazing-fast streaming platform with multi-source fallback, real-time episode data, and a Netflix-style UI. Built for 1,000+ users who needed reliable, high-speed anime content.",
-      result: "Serves 1,000+ users · 50% faster load than competitors · 99.9% uptime on Vercel."
+      problem: "Problem Solved: Existing anime platforms lacked a premium, modern UI/UX focused on user immersion and seamless navigation.",
+      description: "A high-fidelity UI/UX prototype and frontend showcase built to demonstrate modern streaming aesthetics. Features a Netflix-inspired interface, smooth Framer Motion transitions, and a focus on premium user experience.",
+      result: "✅ Showcase: 100% Custom UI/UX Design - Optimized for Retention & Visual Impact.",
+      isDesignFocused: true
     },
     {
       title: "Creative Developer Portfolio",
@@ -562,9 +564,16 @@ const Projects = () => {
               <div className="px-4 pb-5">
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-purple-400 font-medium text-sm">{project.category}</p>
-                  <span className="text-xs bg-white/10 px-2.5 py-1 rounded-md text-gray-300 font-medium border border-white/5">
-                    {project.tech}
-                  </span>
+                  <div className="flex gap-2">
+                    <span className="text-xs bg-white/10 px-2.5 py-1 rounded-md text-gray-300 font-medium border border-white/5">
+                      {project.tech}
+                    </span>
+                    {project.showcase && (
+                      <span className="text-xs bg-purple-500/20 px-2.5 py-1 rounded-md text-purple-300 font-bold border border-purple-500/30">
+                        {project.showcase}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <h3 className="text-xl font-bold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all mb-2">
                   {project.title}
@@ -578,7 +587,11 @@ const Projects = () => {
                    <p className="text-gray-400 text-sm mb-4 pr-2 leading-relaxed">{project.description}</p>
                 )}
                 {project.result && (
-                  <p className="text-sm text-green-400 font-medium mb-5 bg-green-400/10 block px-3 py-2 rounded-lg border border-green-400/20 leading-relaxed">
+                  <p className={`text-sm font-medium mb-5 block px-3 py-2 rounded-lg border leading-relaxed ${
+                    project.isDesignFocused 
+                      ? "text-purple-300 bg-purple-500/10 border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.1)]" 
+                      : "text-green-400 bg-green-400/10 border-green-400/20"
+                  }`}>
                     <span className="text-white font-semibold">✅ Result:</span> {project.result}
                   </p>
                 )}
