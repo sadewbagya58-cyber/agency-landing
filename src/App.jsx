@@ -384,103 +384,144 @@ const Projects = () => {
           variants={fadeInUp}
           className="mb-12"
         >
+          {/* Outer aura wrapper — glows on hover */}
           <motion.div
-            whileHover={{ scale: 1.015 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="group relative rounded-[2rem] p-[2px] overflow-hidden"
-            style={{
-              background: "linear-gradient(135deg, rgba(124,58,237,0.8) 0%, rgba(59,130,246,0.6) 50%, rgba(124,58,237,0.4) 100%)"
-            }}
+            whileHover={{ scale: 1.012 }}
+            transition={{ type: "spring", stiffness: 180, damping: 22 }}
+            className="group relative rounded-[2rem]"
           >
-            {/* Animated border glow */}
-            <div className="absolute inset-0 rounded-[2rem] blur-sm opacity-60 group-hover:opacity-90 transition-opacity duration-500"
-              style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.9), rgba(59,130,246,0.7), rgba(124,58,237,0.5))" }}
+            {/* Purple-to-Cyan aura glow layer */}
+            <div
+              className="absolute -inset-[2px] rounded-[2rem] opacity-60 group-hover:opacity-100 transition-opacity duration-700 blur-[6px]"
+              style={{
+                background: "linear-gradient(135deg, rgba(124,58,237,0.9) 0%, rgba(6,182,212,0.7) 50%, rgba(124,58,237,0.6) 100%)"
+              }}
+            />
+            {/* Wider ambient glow behind card */}
+            <div
+              className="absolute -inset-[1px] rounded-[2rem] opacity-0 group-hover:opacity-70 transition-opacity duration-700 blur-[28px]"
+              style={{
+                background: "linear-gradient(135deg, rgba(124,58,237,0.6), rgba(6,182,212,0.4))"
+              }}
             />
 
-            <div className="relative rounded-[1.85rem] glass-card p-7 md:p-10 overflow-hidden">
-              {/* Inner ambient glow */}
-              <div className="absolute top-0 right-0 w-[350px] h-[350px] bg-purple-accent/15 rounded-full blur-[80px] pointer-events-none" />
+            {/* Card body — deep dark */}
+            <div className="relative rounded-[1.95rem] overflow-hidden"
+              style={{ background: "linear-gradient(145deg, #0f0f12 0%, #111116 60%, #0c0c10 100%)" }}
+            >
+              {/* Subtle inner texture */}
+              <div className="absolute inset-0 opacity-[0.03]"
+                style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "24px 24px" }}
+              />
+              {/* Inner ambient purple bloom top-right */}
+              <div className="absolute -top-16 -right-16 w-72 h-72 rounded-full pointer-events-none blur-[90px]"
+                style={{ background: "radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%)" }}
+              />
+              {/* Inner ambient cyan bloom bottom-left */}
+              <div className="absolute -bottom-16 -left-8 w-56 h-56 rounded-full pointer-events-none blur-[80px]"
+                style={{ background: "radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%)" }}
+              />
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
-                {/* Left: content */}
-                <div>
-                  {/* Badges row */}
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500/30 to-red-500/20 border border-orange-500/40 text-orange-300">
-                      Featured 🔥
-                    </span>
-                    <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-purple-accent/20 border border-purple-accent/40 text-purple-300">
-                      {lankaMart.category}
-                    </span>
-                    <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300">
-                      {lankaMart.tech}
-                    </span>
-                  </div>
+              <div className="relative z-10 p-7 md:p-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
 
-                  {/* Title */}
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">
-                    {lankaMart.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-gray-300 text-base leading-relaxed mb-6">
-                    {lankaMart.description}
-                  </p>
-
-                  {/* Key Highlights */}
-                  <div className="mb-7">
-                    <p className="text-xs font-bold text-purple-400 uppercase tracking-widest mb-3">Key Highlights</p>
-                    <ul className="space-y-2.5">
-                      {lankaMart.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm">
-                          <span className="text-lg leading-none mt-0.5">{h.emoji}</span>
-                          <span>
-                            <span className="font-semibold text-white">{h.label}:</span>{" "}
-                            <span className="text-gray-400">{h.desc}</span>
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-wrap gap-3">
-                    <a
-                      href={lankaMart.liveLink}
-                      target="_blank" rel="noopener noreferrer"
-                      id="lankamart-live-demo"
-                      className="inline-flex items-center gap-2 bg-purple-accent hover:bg-purple-600 text-white font-bold px-7 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(124,58,237,0.5)] hover:shadow-[0_0_30px_rgba(124,58,237,0.7)] text-sm"
-                    >
-                      <ExternalLink size={16} /> Live Demo
-                    </a>
-                    <a
-                      href={lankaMart.sourceLink}
-                      target="_blank" rel="noopener noreferrer"
-                      id="lankamart-source-code"
-                      className="inline-flex items-center gap-2 border border-white/20 hover:border-white/50 text-white font-semibold px-7 py-3.5 rounded-xl transition-all bg-white/5 hover:bg-white/10 text-sm"
-                    >
-                      <Code size={16} /> Source Code
-                    </a>
-                  </div>
-                </div>
-
-                {/* Right: image */}
-                <div className="relative overflow-hidden rounded-2xl aspect-video bg-gray-900 border border-white/5 shadow-2xl">
-                  <img
-                    src={lankaMart.image}
-                    alt={lankaMart.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <a
-                    href={lankaMart.liveLink}
-                    target="_blank" rel="noopener noreferrer"
-                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  >
-                    <div className="w-16 h-16 rounded-full bg-white/90 text-black flex items-center justify-center shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-300">
-                      <ExternalLink size={22} />
+                  {/* ── Left: Content ── */}
+                  <div>
+                    {/* Badges */}
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full border border-white/15 bg-white/5 text-white/90 tracking-wide">
+                        Featured 🔥
+                      </span>
+                      <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-400">
+                        {lankaMart.category}
+                      </span>
+                      <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-500">
+                        {lankaMart.tech}
+                      </span>
                     </div>
-                  </a>
+
+                    {/* Title with gradient accent */}
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 leading-tight">
+                      <span className="text-white">LankaMart – </span>
+                      <span style={{ backgroundImage: "linear-gradient(90deg, #a855f7, #06b6d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                        High-Conversion E-commerce Marketplace
+                      </span>
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                      {lankaMart.description}
+                    </p>
+
+                    {/* Key Highlights */}
+                    <div className="mb-7">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500 mb-3">Key Highlights</p>
+                      <ul className="space-y-2.5">
+                        {lankaMart.highlights.map((h, i) => (
+                          <li key={i} className="flex items-start gap-3 text-sm">
+                            <span className="text-base leading-none mt-0.5 opacity-90">{h.emoji}</span>
+                            <span>
+                              <span className="font-semibold text-white/90">{h.label}:</span>{" "}
+                              <span className="text-gray-500">{h.desc}</span>
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-wrap gap-3">
+                      <a
+                        href={lankaMart.liveLink}
+                        target="_blank" rel="noopener noreferrer"
+                        id="lankamart-live-demo"
+                        className="inline-flex items-center gap-2 text-white font-bold px-7 py-3.5 rounded-xl text-sm transition-all"
+                        style={{
+                          background: "linear-gradient(135deg, #7c3aed, #06b6d4)",
+                          boxShadow: "0 0 22px rgba(124,58,237,0.45)"
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.boxShadow = "0 0 36px rgba(124,58,237,0.65), 0 0 20px rgba(6,182,212,0.3)"}
+                        onMouseLeave={e => e.currentTarget.style.boxShadow = "0 0 22px rgba(124,58,237,0.45)"}
+                      >
+                        <ExternalLink size={15} /> Live Demo
+                      </a>
+                      <a
+                        href="https://github.com/sadewbagya58-cyber/lankamart.git"
+                        target="_blank" rel="noopener noreferrer"
+                        id="lankamart-source-code"
+                        className="inline-flex items-center gap-2 border border-white/10 hover:border-white/30 text-gray-300 hover:text-white font-semibold px-7 py-3.5 rounded-xl transition-all bg-white/[0.03] hover:bg-white/[0.07] text-sm"
+                      >
+                        <Code size={15} /> Source Code
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* ── Right: Mobile UI Preview ── */}
+                  <div className="relative flex justify-center lg:justify-end">
+                    {/* Phone frame */}
+                    <div className="relative w-[220px] md:w-[260px]">
+                      {/* Glow behind phone */}
+                      <div className="absolute inset-0 rounded-[2.5rem] blur-[30px] opacity-40 group-hover:opacity-70 transition-opacity duration-700"
+                        style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.5), rgba(6,182,212,0.3))" }}
+                      />
+                      {/* Phone shell */}
+                      <div className="relative rounded-[2.2rem] border border-white/10 overflow-hidden shadow-2xl"
+                        style={{ background: "#0a0a0a" }}
+                      >
+                        <img
+                          src="/lankamart_preview.png"
+                          alt="LankaMart Mobile UI — Product cards with LKR prices, cart, categories"
+                          className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      </div>
+                      {/* Live badge on phone */}
+                      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-[#0f0f12] border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold text-white/80 whitespace-nowrap shadow-lg">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        lankamart-beta.vercel.app
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
