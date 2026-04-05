@@ -125,11 +125,15 @@ const Hero = () => {
           viewport={{ once: true }}
           variants={staggerContainer}
         >
-          <motion.div variants={fadeInUp} className="inline-block mb-4 px-4 py-1.5 rounded-full glass-card border border-white/10">
-            <span className="text-sm font-medium text-gray-300 flex items-center gap-2">
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-white/10">
               <span className="w-2 h-2 rounded-full bg-purple-accent animate-pulse"></span>
-              Available for new projects
-            </span>
+              <span className="text-sm font-medium text-gray-300">Available for new projects</span>
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-yellow-500/40 bg-yellow-500/10 backdrop-blur-sm">
+              <span className="text-yellow-400 text-sm">⚡</span>
+              <span className="text-sm font-semibold text-yellow-300">Limited: Only 2 project slots available for April.</span>
+            </div>
           </motion.div>
           
           <motion.h1 
@@ -240,6 +244,7 @@ const Services = () => {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Our <span className="text-gradient">Expertise</span></h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">Elite digital capabilities designed to accelerate exceptional growth.</p>
+          <p className="mt-4 text-sm text-purple-300 font-medium">💎 Premium solutions starting at competitive rates. <a href="#contact" className="underline underline-offset-2 text-purple-400 hover:text-white transition-colors">Get a custom quote today.</a></p>
         </motion.div>
 
         <motion.div 
@@ -309,15 +314,21 @@ const Projects = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeInUp}
-          className="flex justify-between items-end mb-16"
+          className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4"
         >
           <div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured <span className="text-gradient">Projects</span></h2>
             <p className="text-gray-400 text-lg">A selection of our latest and greatest work.</p>
           </div>
-          <a href="#" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-white transition-colors pb-2">
-            View All Work <ArrowRight size={18} />
-          </a>
+          <div className="flex flex-col sm:items-end gap-3">
+            <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+              View All Work <ArrowRight size={18} />
+            </a>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 backdrop-blur-sm">
+              <span className="text-green-400 text-sm">⚡</span>
+              <span className="text-xs font-semibold text-green-300 tracking-wide">99+ PageSpeed Score | SEO Optimized</span>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div 
@@ -385,36 +396,89 @@ const Projects = () => {
   );
 };
 
+const StarRating = () => (
+  <div className="flex justify-center mb-5">
+    {[...Array(5)].map((_, i) => (
+      <svg key={i} className="w-5 h-5 text-yellow-500 mx-0.5" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+      </svg>
+    ))}
+  </div>
+);
+
 const Testimonial = () => {
+  const testimonials = [
+    {
+      quote: `"AuraTech delivered a masterpiece. Our conversion rate increased by <span class='text-purple-400 font-bold'>40%</span> in the first month."`,
+      name: "Founder",
+      company: "TechFlow",
+      initial: "T",
+      featured: true
+    },
+    {
+      quote: `"The ROI was instant. Our site load speed dropped by 60% and leads doubled."`,
+      name: "Marketing Director",
+      company: "Nexa",
+      initial: "N",
+      featured: false
+    },
+    {
+      quote: `"Professional, fast, and exactly what we needed to scale our startup."`,
+      name: "CEO",
+      company: "Innovate Inc.",
+      initial: "I",
+      featured: false
+    }
+  ];
+
   return (
     <section className="py-20 relative z-10 border-t border-white/5 bg-black/60">
       <div className="absolute top-1/2 right-0 w-[300px] h-[300px] bg-purple-accent/10 rounded-full blur-[80px] pointer-events-none -translate-y-1/2"></div>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <motion.div 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeInUp}
+          className="text-center mb-14"
         >
-          <div className="flex justify-center mb-6">
-            {[...Array(5)].map((_, i) => (
-              <svg key={i} className="w-6 h-6 text-yellow-500 mx-1" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            ))}
-          </div>
-          <blockquote className="text-2xl md:text-4xl font-medium leading-relaxed italic text-white mb-8">
-            "AuraTech delivered a masterpiece. Our conversion rate increased by <span className="text-purple-400 font-bold">40%</span> in the first month."
-          </blockquote>
-          <div className="flex items-center justify-center gap-4">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-xl font-bold text-white border border-white/10 uppercase">
-              T
-            </div>
-            <div className="text-left">
-              <p className="font-bold text-white text-lg">Founder</p>
-              <p className="text-gray-400 text-sm">TechFlow</p>
-            </div>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-3">What <span className="text-gradient">Clients Say</span></h2>
+          <p className="text-gray-400 text-lg">Real results from real businesses we've partnered with.</p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={i}
+              variants={fadeInUp}
+              className={`glass-card rounded-3xl p-8 border flex flex-col ${
+                t.featured
+                  ? "border-purple-accent/40 shadow-[0_0_30px_rgba(124,58,237,0.15)]"
+                  : "border-white/5"
+              }`}
+            >
+              <StarRating />
+              <blockquote
+                className="text-lg md:text-xl font-medium italic text-white mb-6 flex-grow leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: t.quote }}
+              />
+              <div className="flex items-center gap-3 pt-4 border-t border-white/10">
+                <div className="w-11 h-11 bg-gradient-to-br from-purple-accent to-blue-accent rounded-full flex items-center justify-center text-base font-bold text-white uppercase flex-shrink-0">
+                  {t.initial}
+                </div>
+                <div>
+                  <p className="font-bold text-white">{t.name}</p>
+                  <p className="text-gray-400 text-sm">{t.company}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
@@ -605,10 +669,56 @@ const Footer = () => {
   );
 };
 
+const FinalCTA = () => (
+  <section className="py-24 relative z-10 border-t border-white/5">
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-accent/5 to-transparent pointer-events-none" />
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+      >
+        <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-yellow-500/40 bg-yellow-500/10 mb-6">
+          <span className="text-yellow-400 text-sm">⚡</span>
+          <span className="text-sm font-semibold text-yellow-300">Limited: Only 2 project slots available for April</span>
+        </motion.div>
+        <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          Ready to <span className="text-gradient">grow your business?</span><br />
+          <span className="text-white">Let's build your high-converting website today.</span>
+        </motion.h2>
+        <motion.p variants={fadeInUp} className="text-gray-400 text-xl mb-10 max-w-2xl mx-auto">
+          Join 10+ businesses already scaling with AuraTech. Spots fill fast — secure yours now.
+        </motion.p>
+        <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            animate={{ y: [0, -6, 0] }}
+            transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+            className="bg-white text-black px-10 py-5 rounded-full font-bold text-xl hover:bg-gray-100 transition-colors flex items-center gap-2 shadow-[0_0_40px_rgba(255,255,255,0.2)] w-full sm:w-auto justify-center"
+          >
+            Get My Free Demo <ArrowRight size={22} />
+          </motion.a>
+          <a
+            href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glass-card px-10 py-5 rounded-full font-bold text-xl text-white hover:bg-white/10 transition-colors flex items-center gap-2 border border-white/10 w-full sm:w-auto justify-center"
+          >
+            <MessageCircle size={22} /> Chat on WhatsApp
+          </a>
+        </motion.div>
+      </motion.div>
+    </div>
+  </section>
+);
+
 const FloatingWhatsApp = () => {
   return (
     <motion.a
-      href="https://wa.me/94704479608"
+      href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}
@@ -636,6 +746,7 @@ function App() {
         <Testimonial />
         <TechStack />
         <Contact />
+        <FinalCTA />
       </main>
       <Footer />
       <FloatingWhatsApp />
