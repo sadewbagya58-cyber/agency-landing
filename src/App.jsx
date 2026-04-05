@@ -63,8 +63,30 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
-            <a href="#" className="text-2xl font-bold text-white tracking-tighter cursor-pointer">
-              Aura<span className="text-gradient">Tech</span>.
+            <a href="#" className="flex items-center gap-3 group cursor-pointer">
+              <div className="relative">
+                {/* Logo Glow */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-accent to-cyan-500 rounded-full blur-[8px] opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
+                
+                {/* Official Logo SVG */}
+                <svg className="w-10 h-10 relative z-10 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]" viewBox="0 0 512 512" fill="none">
+                  <defs>
+                    <linearGradient id="nav-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#004182" />
+                      <stop offset="100%" stop-color="#00E5FF" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M256 12C121.2 12 12 121.2 12 256s109.2 244 244 244 244-109.2 244-244S390.8 12 256 12zm0 448c-112.7 0-204-91.3-204-204S143.3 52 256 52s204 91.3 204 204-91.3 204-204 204z" fill="url(#nav-logo-grad)" opacity="0.15" />
+                  <path d="M256 52c-112.7 0-204 91.3-204 204s91.3 204 204 204 204-91.3 204-204-91.3-204-204-204zm0 376c-95 0-172-77-172-172s77-172 172-172 172 77 172 172-77 172-172 172z" fill="url(#nav-logo-grad)" opacity="0.3" />
+                  <path d="M305 130c-15.4 0-28 12.6-28 28s12.6 28 28 28 28-12.6 28-28-12.6-28-28-28zM365 75c-11 0-20 9-20 20s9 20 20 20 20-9 20-20-9-20-20-20z" fill="url(#nav-logo-grad)" />
+                  <path d="M256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128c0-50.5-29.2-94-71.7-114.9 14.5 15.5 24.3 35.8 24.3 58.9 0 35.3-22.1 65.5-52.6 77.2-2.5 1-4 3.7-4 6.3V296c0 13.3 10.7 24 24 24s24-10.7 24-24v-4c40-15.3 68-54.1 68-96 0-30.8-13.1-58.4-34-78.1z" fill="url(#nav-logo-grad)" />
+                  <path d="M256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128-57.3-128-128-128zm0 216c-48.6 0-88-39.4-88-88s39.4-88 88-88 88 39.4 88 88-39.4 88-88 88z" fill="url(#nav-logo-grad)" />
+                  <path d="M232 208l-56 128h32l12-32h40l12 32h32l-56-128h-16zm-4 72l12-32 12 32h-24z" fill="#fff" />
+                </svg>
+              </div>
+              <span className="text-2xl font-bold text-white tracking-tighter">
+                Aura<span className="text-gradient">Tech</span>.
+              </span>
             </a>
           </div>
           
