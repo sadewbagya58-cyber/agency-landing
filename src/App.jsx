@@ -71,10 +71,8 @@ const Navbar = () => {
                 {/* Official Logo SVG */}
                 <svg className="w-10 h-10 relative z-10 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]" viewBox="0 0 512 512" fill="none">
                   <defs>
-                    <linearGradient id="nav-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#004182" />
-                      <stop offset="100%" stop-color="#00E5FF" />
-                    </linearGradient>
+                      <stop offset="0%" stopColor="#004182" />
+                      <stop offset="100%" stopColor="#00E5FF" />
                   </defs>
                   <path d="M256 12C121.2 12 12 121.2 12 256s109.2 244 244 244 244-109.2 244-244S390.8 12 256 12zm0 448c-112.7 0-204-91.3-204-204S143.3 52 256 52s204 91.3 204 204-91.3 204-204 204z" fill="url(#nav-logo-grad)" opacity="0.15" />
                   <path d="M256 52c-112.7 0-204 91.3-204 204s91.3 204 204 204 204-91.3 204-204-91.3-204-204-204zm0 376c-95 0-172-77-172-172s77-172 172-172 172 77 172 172-77 172-172 172z" fill="url(#nav-logo-grad)" opacity="0.3" />
@@ -633,94 +631,240 @@ const Projects = () => {
   );
 };
 
-const StarRating = () => (
-  <div className="flex justify-center mb-5">
-    {[...Array(5)].map((_, i) => (
-      <svg key={i} className="w-5 h-5 text-yellow-500 mx-0.5" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-      </svg>
-    ))}
-  </div>
-);
+const StarRating = ({ rating, interactive = false, onRatingChange = () => {} }) => {
+  const [hoverRating, setHoverRating] = useState(0);
 
-const Testimonial = () => {
-  const testimonials = [
+  return (
+    <div className={`flex justify-center ${interactive ? 'gap-2 mb-8' : 'mb-5'}`}>
+      {[...Array(5)].map((_, i) => {
+        const starValue = i + 1;
+        const isActive = interactive ? (hoverRating || rating) >= starValue : rating >= starValue;
+        
+        return (
+          <svg 
+            key={i} 
+            className={`w-6 h-6 cursor-pointer transition-all duration-200 transform ${
+              isActive ? 'text-yellow-400 scale-110 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]' : 'text-gray-600'
+            } ${interactive ? 'hover:scale-125' : ''}`}
+            fill="currentColor" 
+            viewBox="0 0 20 20"
+            onMouseEnter={() => interactive && setHoverRating(starValue)}
+            onMouseLeave={() => interactive && setHoverRating(0)}
+            onClick={() => interactive && onRatingChange(starValue)}
+          >
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        );
+      })}
+    </div>
+  );
+};
+
+const ReviewSystem = () => {
+  const initialReviews = [
     {
+      id: 1,
       quote: `"AuraTech delivered a masterpiece. Our conversion rate increased by <span class='text-purple-400 font-bold'>40%</span> in the first month."`,
-      name: "Founder",
+      name: "Alex Rivera",
       company: "TechFlow",
-      initial: "T",
+      initial: "A",
+      rating: 5,
       featured: true
     },
     {
-      quote: `"The ROI was instant. Our site load speed dropped by 60% and leads doubled."`,
-      name: "Marketing Director",
+      id: 2,
+      quote: `"The ROI was instant. Our site load speed dropped by 60% and leads doubled. Truly exceptional work."`,
+      name: "Sarah Chen",
       company: "Nexa",
-      initial: "N",
-      featured: false
-    },
-    {
-      quote: `"Professional, fast, and exactly what we needed to scale our startup."`,
-      name: "CEO",
-      company: "Innovate Inc.",
-      initial: "I",
+      initial: "S",
+      rating: 5,
       featured: false
     }
   ];
 
+  const [reviews, setReviews] = useState(() => {
+    const saved = localStorage.getItem('auratech_reviews');
+    return saved ? JSON.parse(saved) : initialReviews;
+  });
+
+  const [formData, setFormData] = useState({ name: '', company: '', quote: '', rating: 5 });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('auratech_reviews', JSON.stringify(reviews));
+  }, [reviews]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.quote) return;
+    
+    setIsSubmitting(true);
+    
+    const newReview = {
+      id: Date.now(),
+      ...formData,
+      initial: formData.name.charAt(0).toUpperCase(),
+      featured: false
+    };
+
+    setTimeout(() => {
+      setReviews([newReview, ...reviews]);
+      setFormData({ name: '', company: '', quote: '', rating: 5 });
+      setIsSubmitting(false);
+    }, 800);
+  };
+
   return (
-    <section className="py-20 relative z-10 border-t border-white/5 bg-black/60">
-      <div className="absolute top-1/2 right-0 w-[300px] h-[300px] bg-purple-accent/10 rounded-full blur-[80px] pointer-events-none -translate-y-1/2"></div>
+    <section className="py-24 relative z-10 border-t border-white/5 bg-black/60 overflow-hidden">
+      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-purple-accent/10 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-accent/5 rounded-full blur-[80px] pointer-events-none translate-y-1/2 -translate-x-1/2"></div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeInUp}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-3">What <span className="text-gradient">Clients Say</span></h2>
-          <p className="text-gray-400 text-lg">Real results from real businesses we've partnered with.</p>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-white/10 mb-6">
+            <span className="text-sm font-medium text-purple-300">Social Proof</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">What <span className="text-gradient">Clients Say</span></h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">See why businesses trust AuraTech to power their digital growth.</p>
         </motion.div>
 
+        {/* Reviews Grid */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"
         >
-          {testimonials.map((t, i) => (
+          {reviews.slice(0, 6).map((t, i) => (
             <motion.div
-              key={i}
+              key={t.id}
               variants={fadeInUp}
-              className={`glass-card rounded-3xl p-8 border flex flex-col ${
+              className={`glass-card rounded-[2rem] p-8 border hover:border-purple-accent/40 transition-all duration-500 flex flex-col group ${
                 t.featured
-                  ? "border-purple-accent/40 shadow-[0_0_30px_rgba(124,58,237,0.15)]"
+                  ? "border-purple-accent/35 shadow-[0_0_40px_rgba(124,58,237,0.12)] scale-[1.02] bg-white/[0.04]"
                   : "border-white/5"
               }`}
             >
-              <StarRating />
+              <div className="flex mb-5">
+                {[...Array(5)].map((_, starIndex) => (
+                  <svg key={starIndex} className={`w-4 h-4 ${starIndex < t.rating ? 'text-yellow-500' : 'text-gray-600'} mx-0.5`} fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              
               <blockquote
-                className="text-lg md:text-xl font-medium italic text-white mb-6 flex-grow leading-relaxed"
+                className="text-lg font-medium italic text-gray-200 mb-8 flex-grow leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: t.quote }}
               />
-              <div className="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div className="w-11 h-11 bg-gradient-to-br from-purple-accent to-blue-accent rounded-full flex items-center justify-center text-base font-bold text-white uppercase flex-shrink-0">
+              
+              <div className="flex items-center gap-4 pt-6 border-t border-white/5">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-accent to-blue-accent rounded-full flex items-center justify-center text-lg font-bold text-white uppercase shadow-lg group-hover:scale-110 transition-transform">
                   {t.initial}
                 </div>
                 <div>
-                  <p className="font-bold text-white">{t.name}</p>
-                  <p className="text-gray-400 text-sm">{t.company}</p>
+                  <p className="font-bold text-white tracking-tight">{t.name}</p>
+                  <p className="text-gray-500 text-xs font-semibold uppercase tracking-widest">{t.company || "Satisfied Client"}</p>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Review Form */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeInUp}
+          className="max-w-2xl mx-auto"
+        >
+          <div className="glass-card rounded-[2.5rem] p-10 border border-white/10 relative overflow-hidden">
+            {/* Subtle glow behind form */}
+            <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-accent/5 rounded-full blur-[60px] pointer-events-none"></div>
+            
+            <div className="text-center mb-10 relative z-10">
+              <h3 className="text-2xl font-bold text-white mb-2">Leave a Review</h3>
+              <p className="text-gray-400 text-sm">Your feedback helps us grow and serve you better.</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+              <StarRating 
+                rating={formData.rating} 
+                interactive={true} 
+                onRatingChange={(val) => setFormData({ ...formData, rating: val })} 
+              />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Your Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-5 py-4 rounded-2xl glass-input transition-all focus:shadow-[0_0_20px_rgba(124,58,237,0.25)] text-sm"
+                    placeholder="Enter your name"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Company (Optional)</label>
+                  <input
+                    type="text"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    className="w-full px-5 py-4 rounded-2xl glass-input transition-all focus:shadow-[0_0_20px_rgba(124,58,237,0.25)] text-sm"
+                    placeholder="e.g. Acme Inc"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Testimonial</label>
+                <textarea
+                  required
+                  rows="3"
+                  value={formData.quote}
+                  onChange={(e) => setFormData({ ...formData, quote: e.target.value })}
+                  className="w-full px-5 py-4 rounded-2xl glass-input transition-all resize-none focus:shadow-[0_0_20px_rgba(124,58,237,0.25)] text-sm"
+                  placeholder="Share your experience with us..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full relative group overflow-hidden rounded-2xl p-[1px] transition-transform active:scale-95"
+              >
+                {/* Submit Background Glow */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-accent to-cyan-500 opacity-80 group-hover:opacity-100 transition-opacity" />
+                
+                {/* Button Content */}
+                <div className="relative bg-black/20 backdrop-blur-md px-8 py-4 rounded-2xl flex items-center justify-center gap-3 transition-colors group-hover:bg-transparent">
+                  <span className="font-bold text-white text-lg tracking-tight">
+                    {isSubmitting ? "Submitting..." : "Submit Review"}
+                  </span>
+                  {!isSubmitting && <Send size={18} className="text-white" />}
+                </div>
+
+                {/* Animated Glow Border */}
+                <div className="absolute -inset-[2px] rounded-2xl bg-gradient-to-r from-purple-accent via-cyan-400 to-purple-accent bg-[length:200%_auto] animate-marquee opacity-0 group-hover:opacity-100 blur-[4px] -z-10 transition-opacity" style={{ animationDuration: '3s' }} />
+              </button>
+            </form>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 };
+
 
 const WhyChooseUs = () => {
   const reasons = [
@@ -1050,7 +1194,7 @@ function App() {
         <Services />
         <Projects />
         <WhyChooseUs />
-        <Testimonial />
+        <ReviewSystem />
         <TechStack />
         <Contact />
         <FinalCTA />
