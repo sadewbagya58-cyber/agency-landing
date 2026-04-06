@@ -52,23 +52,41 @@ const MouseFollowGlow = () => {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'Services', href: '#services' },
+    { name: 'Work', href: '#work' },
+    { name: 'About', href: '#about' }
+  ];
 
   return (
     <motion.nav 
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed w-full z-50 glass-nav transition-all duration-300"
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled ? 'py-4 glass-nav border-b border-white/10 shadow-2xl' : 'py-6 bg-transparent'
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
-            <a href="#" className="flex items-center gap-3 group cursor-pointer">
+            <motion.a 
+              href="#" 
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-3 group cursor-pointer"
+            >
               <div className="relative">
-                {/* Logo Glow */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-accent to-cyan-500 rounded-full blur-[8px] opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
-                
-                {/* Official Logo SVG */}
                 <svg className="w-10 h-10 relative z-10 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]" viewBox="0 0 512 512" fill="none">
                   <defs>
                       <stop offset="0%" stopColor="#004182" />
@@ -85,26 +103,32 @@ const Navbar = () => {
               <span className="text-2xl font-bold text-white tracking-tighter">
                 Aura<span className="text-gradient">Tech</span>.
               </span>
-            </a>
+            </motion.a>
           </div>
           
-          {/* Desktop Menu */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              <a href="#services" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Services</a>
-              <a href="#work" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Work</a>
-              <a href="#about" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
-              <a
+            <div className="ml-10 flex items-center space-x-8">
+              {navLinks.map((link) => (
+                <motion.a 
+                  key={link.name}
+                  href={link.href} 
+                  whileTap={{ scale: 0.95 }}
+                  className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+              <motion.a
+                whileTap={{ scale: 0.95 }}
                 href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
                 target="_blank" rel="noopener noreferrer"
-                className="bg-[#25D366] hover:bg-[#1ebe5a] text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all transform hover:scale-105 flex items-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.4)]"
+                className="bg-[#25D366] hover:bg-[#1ebe5a] text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all transform flex items-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.4)]"
               >
                 <MessageCircle size={15} /> Message for a Quote
-              </a>
+              </motion.a>
             </div>
           </div>
           
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button 
               onClick={() => setIsOpen(!isOpen)}
@@ -116,22 +140,32 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
         <motion.div 
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
-          className="md:hidden glass-nav border-t border-white/10"
+          className="md:hidden glass-nav border-t border-white/5 bg-black/95 backdrop-blur-2xl"
         >
-          <div className="px-2 pt-2 pb-6 space-y-1 sm:px-3">
-            <a href="#services" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Services</a>
-            <a href="#work" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Work</a>
-            <a href="#about" className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">About</a>
-            <a
+          <div className="px-6 pt-2 pb-8 space-y-2">
+            {navLinks.map((link) => (
+              <motion.a 
+                key={link.name}
+                href={link.href} 
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsOpen(false)}
+                className="text-gray-300 hover:text-white block px-3 py-4 text-lg font-medium border-b border-white/5 last:border-0"
+              >
+                {link.name}
+              </motion.a>
+            ))}
+            <motion.a
+              whileTap={{ scale: 0.95 }}
               href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
               target="_blank" rel="noopener noreferrer"
-              className="text-[#25D366] block px-3 py-2 text-base font-medium"
-            >💬 Message for a Quote</a>
+              className="text-[#25D366] block px-3 py-4 text-lg font-medium"
+            >
+              💬 Message for a Quote
+            </motion.a>
           </div>
         </motion.div>
       )}
@@ -169,7 +203,7 @@ const Hero = () => {
               hidden: { opacity: 0, y: 50 },
               visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } }
             }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight max-w-5xl mx-auto"
+            className="text-[clamp(2.5rem,8vw,6rem)] font-bold tracking-tight mb-8 leading-[1.1] max-w-5xl mx-auto px-4"
           >
             We Build <span className="text-gradient">High-Performance</span><br className="hidden md:block" />
             Websites &amp; Apps For Your Business.
@@ -177,24 +211,29 @@ const Hero = () => {
           
           <motion.p 
             variants={fadeInUp}
-            className="mt-6 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10"
+            className="mt-6 text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10 px-6"
           >
             Transform your business with modern digital solutions. From small shops to large enterprises, we help you grow online.
           </motion.p>
           
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center px-6">
             <motion.a
+              whileTap={{ scale: 0.95 }}
               href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
               target="_blank" rel="noopener noreferrer"
               animate={{ y: [0, -5, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="bg-[#25D366] hover:bg-[#1ebe5a] text-white px-8 py-4 rounded-full font-semibold text-lg transition-colors flex items-center gap-2 shadow-[0_0_20px_rgba(37,211,102,0.35)] w-full sm:w-auto justify-center"
             >
-              <MessageCircle size={20} /> Message on WhatsApp for a Quote
+              <MessageCircle size={20} /> Message on WhatsApp
             </motion.a>
-            <a href="#contact" className="glass-card px-8 py-4 rounded-full font-semibold text-lg text-white hover:bg-white/10 transition-colors border border-white/10 w-full sm:w-auto text-center">
+            <motion.a 
+              whileTap={{ scale: 0.95 }}
+              href="#contact" 
+              className="glass-card px-8 py-4 rounded-full font-semibold text-lg text-white hover:bg-white/10 transition-colors border border-white/10 w-full sm:w-auto text-center"
+            >
               Start Your Project
-            </a>
+            </motion.a>
           </motion.div>
 
           <motion.div 
@@ -277,11 +316,11 @@ const Services = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeInUp}
-          className="text-center mb-16"
+          className="text-center mb-16 px-6"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">What We <span className="text-gradient">Build For You</span></h2>
+          <h2 className="text-[clamp(2.2rem,5vw,3.5rem)] font-bold mb-4 leading-tight">What We <span className="text-gradient">Build For You</span></h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">Affordable, high-quality digital solutions for local and global clients.</p>
-          <p className="mt-4 text-sm text-purple-300 font-medium">💎 Premium solutions starting at competitive rates. <a href="#contact" className="underline underline-offset-2 text-purple-400 hover:text-white transition-colors">Get a custom quote today.</a></p>
+          <p className="mt-4 text-sm text-purple-300 font-medium">💎 Premium solutions starting at competitive rates. <motion.a whileTap={{ scale: 0.95 }} href="#contact" className="underline underline-offset-2 text-purple-400 hover:text-white transition-colors">Get a custom quote today.</motion.a></p>
         </motion.div>
 
         <motion.div 
@@ -314,13 +353,14 @@ const Services = () => {
               <h3 className="text-xl font-bold mb-1 relative z-10">{service.title}</h3>
               <p className="text-purple-400 text-sm font-medium mb-3 relative z-10">{service.subtitle}</p>
               <p className="text-gray-400 leading-relaxed relative z-10 text-sm">{service.description}</p>
-              <a
+              <motion.a
+                whileTap={{ scale: 0.95 }}
                 href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
                 target="_blank" rel="noopener noreferrer"
                 className="mt-6 inline-flex items-center gap-2 text-sm text-[#25D366] font-semibold hover:underline relative z-10"
               >
                 <MessageCircle size={15} /> Get a Quote for This
-              </a>
+              </motion.a>
             </motion.div>
           ))}
         </motion.div>
@@ -383,8 +423,8 @@ const Projects = () => {
           variants={fadeInUp}
           className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4"
         >
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured <span className="text-gradient">Projects</span></h2>
+          <div className="px-2">
+            <h2 className="text-[clamp(2.2rem,5vw,3.5rem)] font-bold mb-4 leading-tight">Featured <span className="text-gradient">Projects</span></h2>
             <p className="text-gray-400 text-lg">A selection of our latest and greatest work.</p>
           </div>
           <div className="flex flex-col sm:items-end gap-3">
@@ -492,12 +532,13 @@ const Projects = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-wrap gap-3">
-                      <a
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <motion.a
+                        whileTap={{ scale: 0.95 }}
                         href={lankaMart.liveLink}
                         target="_blank" rel="noopener noreferrer"
                         id="lankamart-live-demo"
-                        className="inline-flex items-center gap-2 text-white font-bold px-7 py-3.5 rounded-xl text-sm transition-all"
+                        className="inline-flex items-center justify-center gap-2 text-white font-bold px-7 py-4 rounded-xl text-sm transition-all"
                         style={{
                           background: "linear-gradient(135deg, #7c3aed, #06b6d4)",
                           boxShadow: "0 0 22px rgba(124,58,237,0.45)"
@@ -506,15 +547,16 @@ const Projects = () => {
                         onMouseLeave={e => e.currentTarget.style.boxShadow = "0 0 22px rgba(124,58,237,0.45)"}
                       >
                         <ExternalLink size={15} /> Live Demo
-                      </a>
-                      <a
+                      </motion.a>
+                      <motion.a
+                        whileTap={{ scale: 0.95 }}
                         href="https://github.com/sadewbagya58-cyber/lankamart.git"
                         target="_blank" rel="noopener noreferrer"
                         id="lankamart-source-code"
-                        className="inline-flex items-center gap-2 border border-white/10 hover:border-white/30 text-gray-300 hover:text-white font-semibold px-7 py-3.5 rounded-xl transition-all bg-white/[0.03] hover:bg-white/[0.07] text-sm"
+                        className="inline-flex items-center justify-center gap-2 border border-white/10 hover:border-white/30 text-gray-300 hover:text-white font-semibold px-7 py-4 rounded-xl transition-all bg-white/[0.03] hover:bg-white/[0.07] text-sm"
                       >
                         <Code size={15} /> Source Code
-                      </a>
+                      </motion.a>
                     </div>
                   </div>
 
@@ -615,13 +657,14 @@ const Projects = () => {
                     <span className="text-white font-semibold">✅ Result:</span> {project.result}
                   </p>
                 )}
-                <a 
+                <motion.a 
+                  whileTap={{ scale: 0.95 }}
                   href={project.link}
                   target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-bold bg-purple-accent text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition-colors shadow-[0_0_15px_rgba(124,58,237,0.4)] w-max"
+                  className="inline-flex items-center justify-center gap-2 text-sm font-bold bg-purple-accent text-white px-6 py-4 rounded-xl hover:bg-purple-600 transition-colors shadow-[0_0_15px_rgba(124,58,237,0.4)] w-full"
                 >
                   View Live Demo <ExternalLink size={16} />
-                </a>
+                </motion.a>
               </div>
             </motion.div>
           ))}
@@ -730,8 +773,8 @@ const ReviewSystem = () => {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-white/10 mb-6">
             <span className="text-sm font-medium text-purple-300">Social Proof</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">What <span className="text-gradient">Clients Say</span></h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">See why businesses trust AuraTech to power their digital growth.</p>
+          <h2 className="text-[clamp(2.2rem,5vw,3.5rem)] font-bold mb-4 leading-tight">What <span className="text-gradient">Clients Say</span></h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto px-6">See why businesses trust AuraTech to power their digital growth.</p>
         </motion.div>
 
         {/* Reviews Grid */}
@@ -838,7 +881,8 @@ const ReviewSystem = () => {
                 />
               </div>
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full relative group overflow-hidden rounded-2xl p-[1px] transition-transform active:scale-95"
@@ -856,7 +900,7 @@ const ReviewSystem = () => {
 
                 {/* Animated Glow Border */}
                 <div className="absolute -inset-[2px] rounded-2xl bg-gradient-to-r from-purple-accent via-cyan-400 to-purple-accent bg-[length:200%_auto] animate-marquee opacity-0 group-hover:opacity-100 blur-[4px] -z-10 transition-opacity" style={{ animationDuration: '3s' }} />
-              </button>
+              </motion.button>
             </form>
           </div>
         </motion.div>
@@ -889,7 +933,7 @@ const WhyChooseUs = () => {
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-white/10 mb-6">
               <span className="text-sm font-medium text-gray-300">👤 The Human Behind AuraTech</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-[clamp(2.2rem,5vw,3.5rem)] font-bold mb-6 leading-tight">
               Why Choose <span className="text-gradient">AuraTech?</span>
             </h2>
             <div className="glass-card p-6 rounded-2xl border border-purple-accent/20 mb-8">
@@ -906,13 +950,14 @@ const WhyChooseUs = () => {
                 "AuraTech is led by a dedicated student developer from Sri Lanka 🇱🇰, focused on building affordable, high-quality digital solutions for local and global clients. I personally handle every project to ensure the highest standard of work."
               </blockquote>
             </div>
-            <a
+            <motion.a
+              whileTap={{ scale: 0.95 }}
               href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
               target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5a] text-white px-8 py-4 rounded-full font-semibold text-base transition-colors shadow-[0_0_20px_rgba(37,211,102,0.3)]"
+              className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5a] text-white px-8 py-4 rounded-full font-semibold text-base transition-colors shadow-[0_0_20px_rgba(37,211,102,0.3)] w-full sm:w-auto"
             >
               <MessageCircle size={18} /> Let's Talk About Your Project
-            </a>
+            </motion.a>
           </motion.div>
 
           {/* Reasons Grid */}
@@ -960,8 +1005,8 @@ const TechStack = () => {
       id="tech" 
       className="py-20 border-y border-white/5 bg-white/5 relative z-10"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center">
-        <h3 className="text-lg text-gray-400 font-medium uppercase tracking-widest">Technologies we use</h3>
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 mb-10 text-center">
+        <h3 className="text-sm md:text-lg text-gray-400 font-medium uppercase tracking-widest px-4">Technologies we use</h3>
       </div>
       
       <div className="overflow-hidden whitespace-nowrap relative flex no-scrollbar mask-image-gradient">
@@ -1031,9 +1076,9 @@ const Contact = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">Let's build something <span className="text-gradient">extraordinary</span> together.</h2>
-            <p className="text-gray-400 text-lg mb-6">Whether you need a simple landing page or a complex web application, we have the expertise to bring your vision to life.</p>
-            <p className="text-xl md:text-2xl font-bold text-white mb-10 border-l-4 border-purple-accent pl-4">Join 10+ businesses already scaling with AuraTech.</p>
+            <h2 className="text-[clamp(2rem,6vw,4.5rem)] font-bold mb-6 leading-tight px-4">Let's build something <span className="text-gradient">extraordinary</span> together.</h2>
+            <p className="text-gray-400 text-lg mb-6 px-4">Whether you need a simple landing page or a complex web application, we have the expertise to bring your vision to life.</p>
+            <p className="text-xl font-bold text-white mb-10 border-l-4 border-purple-accent pl-4 ml-4">Join 10+ businesses already scaling with AuraTech.</p>
             
             <div className="space-y-6">
               <div className="flex items-center gap-4">
@@ -1078,9 +1123,14 @@ const Contact = () => {
                 <textarea rows="4" name="message" required className="w-full px-4 py-3 rounded-xl glass-input transition-all resize-none focus:shadow-[0_0_15px_rgba(124,58,237,0.3)]" placeholder="Tell us about your project..."></textarea>
               </div>
               <div>
-                <button type="submit" disabled={status === "submitting"} className="w-full bg-white flex justify-center text-black py-4 rounded-xl font-bold text-lg hover:bg-gray-200 transition-all transform hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100">
+                <motion.button 
+                  whileTap={{ scale: 0.95 }}
+                  type="submit" 
+                  disabled={status === "submitting"} 
+                  className="w-full bg-white flex justify-center text-black py-4 rounded-xl font-bold text-lg hover:bg-gray-200 transition-all transform disabled:opacity-70"
+                >
                   {status === "submitting" ? "Sending..." : "Send Message"}
-                </button>
+                </motion.button>
                 {status === "success" && (
                   <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-green-400 text-sm mt-4 text-center font-medium">✨ Message sent successfully! We'll be in touch soon.</motion.p>
                 )}
@@ -1109,10 +1159,10 @@ const Footer = () => {
           </span>
           <p className="text-gray-500 text-sm mt-1">© 2026 AuraTech Agency. All rights reserved.</p>
         </div>
-        <div className="flex gap-6">
-          <a href="#" className="text-gray-400 hover:text-white transition-colors">Twitter</a>
-          <a href="#" className="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
-          <a href="#" className="text-gray-400 hover:text-white transition-colors">Dribbble</a>
+        <div className="flex gap-8">
+          <motion.a whileTap={{ scale: 0.95 }} href="#" className="text-gray-400 hover:text-white transition-colors">Twitter</motion.a>
+          <motion.a whileTap={{ scale: 0.95 }} href="#" className="text-gray-400 hover:text-white transition-colors">LinkedIn</motion.a>
+          <motion.a whileTap={{ scale: 0.95 }} href="#" className="text-gray-400 hover:text-white transition-colors">Dribbble</motion.a>
         </div>
       </div>
     </footer>
@@ -1133,7 +1183,7 @@ const FinalCTA = () => (
           <span className="text-yellow-400 text-sm">⚡</span>
           <span className="text-sm font-semibold text-yellow-300">Limited: Only 2 project slots available for April</span>
         </motion.div>
-        <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+        <motion.h2 variants={fadeInUp} className="text-[clamp(2.2rem,7vw,4rem)] font-bold mb-6 leading-[1.1] px-4">
           Ready to <span className="text-gradient">grow your business?</span><br />
           <span className="text-white">Let's build your high-converting website today.</span>
         </motion.h2>
@@ -1155,7 +1205,7 @@ const FinalCTA = () => (
             href="https://wa.me/94704479608?text=Hi%20AuraTech,%20I'm%20interested%20in%20building%20a%20high-converting%20website%20for%20my%20business."
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card px-10 py-5 rounded-full font-bold text-xl text-white hover:bg-white/10 transition-colors flex items-center gap-2 border border-white/10 w-full sm:w-auto justify-center"
+            className="glass-card px-10 py-5 rounded-full font-bold text-xl text-white hover:bg-white/10 transition-colors flex items-center justify-center gap-2 border border-white/10 w-full sm:w-auto"
           >
             <MessageCircle size={22} /> Chat on WhatsApp
           </a>
