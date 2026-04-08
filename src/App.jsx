@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { 
-  Menu, X, Code, Search, Server, 
+import {
+  Menu, X, Code, Search, Server,
   ArrowRight, ExternalLink, Send, MessageCircle, Bot, Zap
 } from 'lucide-react';
-import { 
-  FaReact, FaNodeJs, FaFigma, FaAws, FaGoogle
+import {
+  FaReact, FaNodeJs, FaFigma, FaAws, FaGoogle, FaLinkedin, FaDribbble
 } from 'react-icons/fa';
-import { 
+import {
   SiTailwindcss, SiNextdotjs, SiFramer, SiFirebase
 } from 'react-icons/si';
 
@@ -69,19 +69,18 @@ const Navbar = () => {
   ];
 
   return (
-    <motion.nav 
+    <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'py-4 glass-nav border-b border-white/10 shadow-2xl' : 'py-6 bg-transparent'
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'py-4 glass-nav border-b border-white/10 shadow-2xl' : 'py-6 bg-transparent'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
-            <motion.a 
-              href="#" 
+            <motion.a
+              href="#"
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-3 group cursor-pointer"
             >
@@ -89,8 +88,8 @@ const Navbar = () => {
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-accent to-cyan-500 rounded-full blur-[8px] opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
                 <svg className="w-10 h-10 relative z-10 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]" viewBox="0 0 512 512" fill="none">
                   <defs>
-                      <stop offset="0%" stopColor="#004182" />
-                      <stop offset="100%" stopColor="#00E5FF" />
+                    <stop offset="0%" stopColor="#004182" />
+                    <stop offset="100%" stopColor="#00E5FF" />
                   </defs>
                   <path d="M256 12C121.2 12 12 121.2 12 256s109.2 244 244 244 244-109.2 244-244S390.8 12 256 12zm0 448c-112.7 0-204-91.3-204-204S143.3 52 256 52s204 91.3 204 204-91.3 204-204 204z" fill="url(#nav-logo-grad)" opacity="0.15" />
                   <path d="M256 52c-112.7 0-204 91.3-204 204s91.3 204 204 204 204-91.3 204-204-91.3-204-204-204zm0 376c-95 0-172-77-172-172s77-172 172-172 172 77 172 172-77 172-172 172z" fill="url(#nav-logo-grad)" opacity="0.3" />
@@ -105,13 +104,13 @@ const Navbar = () => {
               </span>
             </motion.a>
           </div>
-          
+
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-8">
               {navLinks.map((link) => (
-                <motion.a 
+                <motion.a
                   key={link.name}
-                  href={link.href} 
+                  href={link.href}
                   whileTap={{ scale: 0.95 }}
                   className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
@@ -128,9 +127,9 @@ const Navbar = () => {
               </motion.a>
             </div>
           </div>
-          
+
           <div className="md:hidden">
-            <button 
+            <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-300 hover:text-white p-2"
             >
@@ -141,16 +140,16 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           className="md:hidden glass-nav border-t border-white/5 bg-black/95 backdrop-blur-2xl"
         >
           <div className="px-6 pt-2 pb-8 space-y-2">
             {navLinks.map((link) => (
-              <motion.a 
+              <motion.a
                 key={link.name}
-                href={link.href} 
+                href={link.href}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(false)}
                 className="text-gray-300 hover:text-white block px-3 py-4 text-lg font-medium border-b border-white/5 last:border-0"
@@ -179,7 +178,7 @@ const Hero = () => {
       {/* Background Glow Blobs */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-accent/30 rounded-full blur-[120px] opacity-70 pointer-events-none z-0"></div>
       <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-blue-accent/20 rounded-full blur-[100px] opacity-60 pointer-events-none -translate-x-1/2 z-0"></div>
-      
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
         <motion.div
           initial="hidden"
@@ -197,8 +196,8 @@ const Hero = () => {
               <span className="text-sm font-semibold text-yellow-300">Limited: Only 2 project slots available for April.</span>
             </div>
           </motion.div>
-          
-          <motion.h1 
+
+          <motion.h1
             variants={{
               hidden: { opacity: 0, y: 50 },
               visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } }
@@ -208,14 +207,14 @@ const Hero = () => {
             We Build <span className="text-gradient">High-Performance</span><br className="hidden md:block" />
             Websites &amp; Apps For Your Business.
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             variants={fadeInUp}
             className="mt-6 text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10 px-6"
           >
             Transform your business with modern digital solutions. From small shops to large enterprises, we help you grow online.
           </motion.p>
-          
+
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center px-6">
             <motion.a
               whileTap={{ scale: 0.95 }}
@@ -227,16 +226,16 @@ const Hero = () => {
             >
               <MessageCircle size={20} /> Message on WhatsApp
             </motion.a>
-            <motion.a 
+            <motion.a
               whileTap={{ scale: 0.95 }}
-              href="#contact" 
+              href="#contact"
               className="glass-card px-8 py-4 rounded-full font-semibold text-lg text-white hover:bg-white/10 transition-colors border border-white/10 w-full sm:w-auto text-center"
             >
               Start Your Project
             </motion.a>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             variants={fadeInUp}
             className="mt-24 pt-10 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center max-w-4xl mx-auto"
           >
@@ -266,10 +265,10 @@ const TrustLogos = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p className="text-sm text-gray-400 font-semibold uppercase tracking-widest mb-8">Trusted by innovative startups and fast-growing brands</p>
         <div className="flex flex-wrap justify-center gap-8 md:gap-16 items-center opacity-70 grayscale">
-          <div className="flex items-center gap-2 text-2xl font-bold text-white"><Zap size={28} className="text-purple-accent"/> TechFlow</div>
-          <div className="flex items-center gap-2 text-2xl font-bold text-white"><Server size={28} className="text-blue-accent"/> Nexa</div>
-          <div className="flex items-center gap-2 text-xl font-bold text-white tracking-[0.2em] font-serif uppercase"><Bot size={24} className="text-yellow-500"/> Global Solutions</div>
-          <div className="flex items-center gap-2 text-2xl font-black italic text-white"><Code size={28} className="text-green-400"/> Innovate Inc.</div>
+          <div className="flex items-center gap-2 text-2xl font-bold text-white"><Zap size={28} className="text-purple-accent" /> TechFlow</div>
+          <div className="flex items-center gap-2 text-2xl font-bold text-white"><Server size={28} className="text-blue-accent" /> Nexa</div>
+          <div className="flex items-center gap-2 text-xl font-bold text-white tracking-[0.2em] font-serif uppercase"><Bot size={24} className="text-yellow-500" /> Global Solutions</div>
+          <div className="flex items-center gap-2 text-2xl font-black italic text-white"><Code size={28} className="text-green-400" /> Innovate Inc.</div>
         </div>
       </div>
     </section>
@@ -311,7 +310,7 @@ const Services = () => {
   return (
     <section id="services" className="py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -323,7 +322,7 @@ const Services = () => {
           <p className="mt-4 text-sm text-purple-300 font-medium">💎 Premium solutions starting at competitive rates. <motion.a whileTap={{ scale: 0.95 }} href="#contact" className="underline underline-offset-2 text-purple-400 hover:text-white transition-colors">Get a custom quote today.</motion.a></p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -331,17 +330,17 @@ const Services = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {services.map((service, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               variants={fadeInUp}
-              whileHover={{ 
-                scale: 1.03, 
+              whileHover={{
+                scale: 1.03,
                 boxShadow: "0 20px 40px -10px rgba(124, 58, 237, 0.2)"
               }}
               className="glass-card p-8 rounded-3xl transition-all duration-500 group relative border border-white/5 hover:border-purple-accent/50 cursor-default overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-accent/0 to-purple-accent/0 group-hover:from-purple-accent/10 group-hover:to-blue-accent/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
-              
+
               <div className="flex items-start justify-between mb-6 relative z-10">
                 <div className="bg-white/5 w-16 h-16 flex items-center justify-center rounded-2xl group-hover:bg-white/10 transition-colors">
                   {service.icon}
@@ -414,9 +413,9 @@ const Projects = () => {
     <section id="work" className="py-24 relative bg-black/50 z-10 border-t border-white/5">
       {/* Background glow */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-accent/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -593,7 +592,7 @@ const Projects = () => {
         </motion.div>
 
         {/* ── Other Projects Grid ── */}
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -601,20 +600,20 @@ const Projects = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-10"
         >
           {projects.map((project, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               variants={fadeInUp}
-              whileHover={{ 
-                scale: 1.05, 
-                rotate: 1, 
+              whileHover={{
+                scale: 1.05,
+                rotate: 1,
                 boxShadow: "0 20px 40px -10px rgba(124, 58, 237, 0.2)"
               }}
               className="group p-2 rounded-[2rem] glass-card border border-white/5 hover:border-purple-accent/50 transition-all duration-500"
             >
               <div className="relative overflow-hidden rounded-3xl aspect-video flex items-center justify-center bg-gray-900 border-white/10 mb-5">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
+                <img
+                  src={project.image}
+                  alt={project.title}
                   className="w-full h-full object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -646,18 +645,17 @@ const Projects = () => {
                   </p>
                 )}
                 {project.description && (
-                   <p className="text-gray-400 text-sm mb-4 pr-2 leading-relaxed">{project.description}</p>
+                  <p className="text-gray-400 text-sm mb-4 pr-2 leading-relaxed">{project.description}</p>
                 )}
                 {project.result && (
-                  <p className={`text-sm font-medium mb-5 block px-3 py-2 rounded-lg border leading-relaxed ${
-                    project.isDesignFocused 
-                      ? "text-purple-300 bg-purple-500/10 border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.1)]" 
+                  <p className={`text-sm font-medium mb-5 block px-3 py-2 rounded-lg border leading-relaxed ${project.isDesignFocused
+                      ? "text-purple-300 bg-purple-500/10 border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.1)]"
                       : "text-green-400 bg-green-400/10 border-green-400/20"
-                  }`}>
+                    }`}>
                     <span className="text-white font-semibold">✅ Result:</span> {project.result}
                   </p>
                 )}
-                <motion.a 
+                <motion.a
                   whileTap={{ scale: 0.95 }}
                   href={project.link}
                   target="_blank" rel="noopener noreferrer"
@@ -674,7 +672,7 @@ const Projects = () => {
   );
 };
 
-const StarRating = ({ rating, interactive = false, onRatingChange = () => {} }) => {
+const StarRating = ({ rating, interactive = false, onRatingChange = () => { } }) => {
   const [hoverRating, setHoverRating] = useState(0);
 
   return (
@@ -682,14 +680,13 @@ const StarRating = ({ rating, interactive = false, onRatingChange = () => {} }) 
       {[...Array(5)].map((_, i) => {
         const starValue = i + 1;
         const isActive = interactive ? (hoverRating || rating) >= starValue : rating >= starValue;
-        
+
         return (
-          <svg 
-            key={i} 
-            className={`w-6 h-6 cursor-pointer transition-all duration-200 transform ${
-              isActive ? 'text-yellow-400 scale-110 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]' : 'text-gray-600'
-            } ${interactive ? 'hover:scale-125' : ''}`}
-            fill="currentColor" 
+          <svg
+            key={i}
+            className={`w-6 h-6 cursor-pointer transition-all duration-200 transform ${isActive ? 'text-yellow-400 scale-110 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]' : 'text-gray-600'
+              } ${interactive ? 'hover:scale-125' : ''}`}
+            fill="currentColor"
             viewBox="0 0 20 20"
             onMouseEnter={() => interactive && setHoverRating(starValue)}
             onMouseLeave={() => interactive && setHoverRating(0)}
@@ -740,9 +737,9 @@ const ReviewSystem = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.quote) return;
-    
+
     setIsSubmitting(true);
-    
+
     const newReview = {
       id: Date.now(),
       ...formData,
@@ -789,11 +786,10 @@ const ReviewSystem = () => {
             <motion.div
               key={t.id}
               variants={fadeInUp}
-              className={`glass-card rounded-[2rem] p-8 border hover:border-purple-accent/40 transition-all duration-500 flex flex-col group ${
-                t.featured
+              className={`glass-card rounded-[2rem] p-8 border hover:border-purple-accent/40 transition-all duration-500 flex flex-col group ${t.featured
                   ? "border-purple-accent/35 shadow-[0_0_40px_rgba(124,58,237,0.12)] scale-[1.02] bg-white/[0.04]"
                   : "border-white/5"
-              }`}
+                }`}
             >
               <div className="flex mb-5">
                 {[...Array(5)].map((_, starIndex) => (
@@ -802,12 +798,12 @@ const ReviewSystem = () => {
                   </svg>
                 ))}
               </div>
-              
+
               <blockquote
                 className="text-lg font-medium italic text-gray-200 mb-8 flex-grow leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: t.quote }}
               />
-              
+
               <div className="flex items-center gap-4 pt-6 border-t border-white/5">
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-accent to-blue-accent rounded-full flex items-center justify-center text-lg font-bold text-white uppercase shadow-lg group-hover:scale-110 transition-transform">
                   {t.initial}
@@ -832,17 +828,17 @@ const ReviewSystem = () => {
           <div className="glass-card rounded-[2.5rem] p-10 border border-white/10 relative overflow-hidden">
             {/* Subtle glow behind form */}
             <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-accent/5 rounded-full blur-[60px] pointer-events-none"></div>
-            
+
             <div className="text-center mb-10 relative z-10">
               <h3 className="text-2xl font-bold text-white mb-2">Leave a Review</h3>
               <p className="text-gray-400 text-sm">Your feedback helps us grow and serve you better.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-              <StarRating 
-                rating={formData.rating} 
-                interactive={true} 
-                onRatingChange={(val) => setFormData({ ...formData, rating: val })} 
+              <StarRating
+                rating={formData.rating}
+                interactive={true}
+                onRatingChange={(val) => setFormData({ ...formData, rating: val })}
               />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -889,7 +885,7 @@ const ReviewSystem = () => {
               >
                 {/* Submit Background Glow */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-accent to-cyan-500 opacity-80 group-hover:opacity-100 transition-opacity" />
-                
+
                 {/* Button Content */}
                 <div className="relative bg-black/20 backdrop-blur-md px-8 py-4 rounded-2xl flex items-center justify-center gap-3 transition-colors group-hover:bg-transparent">
                   <span className="font-bold text-white text-lg tracking-tight">
@@ -997,23 +993,23 @@ const TechStack = () => {
   const duplicatedIcons = [...icons, ...icons, ...icons];
 
   return (
-    <motion.section 
+    <motion.section
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={fadeInUp}
-      id="tech" 
+      id="tech"
       className="py-20 border-y border-white/5 bg-white/5 relative z-10"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 mb-10 text-center">
         <h3 className="text-sm md:text-lg text-gray-400 font-medium uppercase tracking-widest px-4">Technologies we use</h3>
       </div>
-      
+
       <div className="overflow-hidden whitespace-nowrap relative flex no-scrollbar mask-image-gradient">
         {/* Left/Right fading edges */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10" />
-        
+
         <div className="animate-marquee flex gap-16 items-center w-max pl-16">
           {duplicatedIcons.map((item, idx) => {
             const { Icon, color, name } = item;
@@ -1039,17 +1035,17 @@ const Contact = () => {
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    
+
     try {
       const response = await fetch("https://formsubmit.co/ajax/sadewbagya58@gmail.com", {
         method: "POST",
-        headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify(data)
       });
-      
+
       if (response.ok) {
         setStatus("success");
         e.target.reset();
@@ -1067,10 +1063,10 @@ const Contact = () => {
   return (
     <section id="contact" className="py-24 relative z-10">
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-purple-accent/10 rounded-full blur-[100px] pointer-events-none"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -1079,7 +1075,7 @@ const Contact = () => {
             <h2 className="text-[clamp(2rem,6vw,4.5rem)] font-bold mb-6 leading-tight px-4">Let's build something <span className="text-gradient">extraordinary</span> together.</h2>
             <p className="text-gray-400 text-lg mb-6 px-4">Whether you need a simple landing page or a complex web application, we have the expertise to bring your vision to life.</p>
             <p className="text-xl font-bold text-white mb-10 border-l-4 border-purple-accent pl-4 ml-4">Join 10+ businesses already scaling with AuraTech.</p>
-            
+
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-purple-accent">
@@ -1092,8 +1088,8 @@ const Contact = () => {
               </div>
             </div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -1103,7 +1099,7 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_subject" value="New Agency Lead!" />
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-300">First Name</label>
@@ -1123,10 +1119,10 @@ const Contact = () => {
                 <textarea rows="4" name="message" required className="w-full px-4 py-3 rounded-xl glass-input transition-all resize-none focus:shadow-[0_0_15px_rgba(124,58,237,0.3)]" placeholder="Tell us about your project..."></textarea>
               </div>
               <div>
-                <motion.button 
+                <motion.button
                   whileTap={{ scale: 0.95 }}
-                  type="submit" 
-                  disabled={status === "submitting"} 
+                  type="submit"
+                  disabled={status === "submitting"}
                   className="w-full bg-white flex justify-center text-black py-4 rounded-xl font-bold text-lg hover:bg-gray-200 transition-all transform disabled:opacity-70"
                 >
                   {status === "submitting" ? "Sending..." : "Send Message"}
@@ -1160,9 +1156,26 @@ const Footer = () => {
           <p className="text-gray-500 text-sm mt-1">© 2026 AuraTech Agency. All rights reserved.</p>
         </div>
         <div className="flex gap-8">
-          <motion.a whileTap={{ scale: 0.95 }} href="#" className="text-gray-400 hover:text-white transition-colors">Twitter</motion.a>
-          <motion.a whileTap={{ scale: 0.95 }} href="#" className="text-gray-400 hover:text-white transition-colors">LinkedIn</motion.a>
-          <motion.a whileTap={{ scale: 0.95 }} href="#" className="text-gray-400 hover:text-white transition-colors">Dribbble</motion.a>
+          <motion.a
+            whileTap={{ scale: 0.95 }}
+            href="https://www.linkedin.com/in/sadew-bagya-44b516401?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 linkedin-hover transition-all duration-300"
+            aria-label="LinkedIn"
+          >
+            <FaLinkedin size={24} />
+          </motion.a>
+          <motion.a
+            whileTap={{ scale: 0.95 }}
+            href="https://dribbble.com/sadew-bagya"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 dribbble-hover transition-all duration-300"
+            aria-label="Dribbble"
+          >
+            <FaDribbble size={24} />
+          </motion.a>
         </div>
       </div>
     </footer>
