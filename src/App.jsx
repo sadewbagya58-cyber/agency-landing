@@ -701,26 +701,7 @@ const StarRating = ({ rating, interactive = false, onRatingChange = () => { } })
 };
 
 const ReviewSystem = () => {
-  const initialReviews = [
-    {
-      id: 1,
-      quote: `"AuraTech delivered a masterpiece. Our conversion rate increased by <span class='text-purple-400 font-bold'>40%</span> in the first month."`,
-      name: "Alex Rivera",
-      company: "TechFlow",
-      initial: "A",
-      rating: 5,
-      featured: true
-    },
-    {
-      id: 2,
-      quote: `"The ROI was instant. Our site load speed dropped by 60% and leads doubled. Truly exceptional work."`,
-      name: "Sarah Chen",
-      company: "Nexa",
-      initial: "S",
-      rating: 5,
-      featured: false
-    }
-  ];
+  const initialReviews = [];
 
   const [reviews, setReviews] = useState(() => {
     const saved = localStorage.getItem('auratech_reviews');
@@ -782,39 +763,45 @@ const ReviewSystem = () => {
           variants={staggerContainer}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"
         >
-          {reviews.slice(0, 6).map((t, i) => (
-            <motion.div
-              key={t.id}
-              variants={fadeInUp}
-              className={`glass-card rounded-[2rem] p-8 border hover:border-purple-accent/40 transition-all duration-500 flex flex-col group ${t.featured
-                  ? "border-purple-accent/35 shadow-[0_0_40px_rgba(124,58,237,0.12)] scale-[1.02] bg-white/[0.04]"
-                  : "border-white/5"
-                }`}
-            >
-              <div className="flex mb-5">
-                {[...Array(5)].map((_, starIndex) => (
-                  <svg key={starIndex} className={`w-4 h-4 ${starIndex < t.rating ? 'text-yellow-500' : 'text-gray-600'} mx-0.5`} fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-
-              <blockquote
-                className="text-lg font-medium italic text-gray-200 mb-8 flex-grow leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: t.quote }}
-              />
-
-              <div className="flex items-center gap-4 pt-6 border-t border-white/5">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-accent to-blue-accent rounded-full flex items-center justify-center text-lg font-bold text-white uppercase shadow-lg group-hover:scale-110 transition-transform">
-                  {t.initial}
+          {reviews.length > 0 ? (
+            reviews.slice(0, 6).map((t, i) => (
+              <motion.div
+                key={t.id}
+                variants={fadeInUp}
+                className={`glass-card rounded-[2rem] p-8 border hover:border-purple-accent/40 transition-all duration-500 flex flex-col group ${t.featured
+                    ? "border-purple-accent/35 shadow-[0_0_40px_rgba(124,58,237,0.12)] scale-[1.02] bg-white/[0.04]"
+                    : "border-white/5"
+                  }`}
+              >
+                <div className="flex mb-5">
+                  {[...Array(5)].map((_, starIndex) => (
+                    <svg key={starIndex} className={`w-4 h-4 ${starIndex < t.rating ? 'text-yellow-500' : 'text-gray-600'} mx-0.5`} fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
                 </div>
-                <div>
-                  <p className="font-bold text-white tracking-tight">{t.name}</p>
-                  <p className="text-gray-500 text-xs font-semibold uppercase tracking-widest">{t.company || "Satisfied Client"}</p>
+
+                <blockquote
+                  className="text-lg font-medium italic text-gray-200 mb-8 flex-grow leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: t.quote }}
+                />
+
+                <div className="flex items-center gap-4 pt-6 border-t border-white/5">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-accent to-blue-accent rounded-full flex items-center justify-center text-lg font-bold text-white uppercase shadow-lg group-hover:scale-110 transition-transform">
+                    {t.initial}
+                  </div>
+                  <div>
+                    <p className="font-bold text-white tracking-tight">{t.name}</p>
+                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-widest">{t.company || "Satisfied Client"}</p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-10">
+              <p className="text-gray-400 italic">No reviews yet. Be the first to leave one!</p>
+            </div>
+          )}
         </motion.div>
 
         {/* Review Form */}
